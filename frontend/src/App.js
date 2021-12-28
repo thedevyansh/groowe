@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme';
+import Layout from './components/Layout';
 import withAuthorization from './components/hoc/withAuthorization';
 import {
   PUBLIC_PAGE,
@@ -28,10 +29,12 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/' component={ErrorNotFound} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/' component={ErrorNotFound} />
+          </Switch>
+        </Layout>
       </BrowserRouter>
     </ChakraProvider>
   );

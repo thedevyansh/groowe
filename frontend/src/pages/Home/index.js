@@ -12,9 +12,9 @@ import {
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
 
-const VerticalHeading = styled.div`
+const HorizontalHeading = styled.div`
   z-index: -1;
-  color: #808080 !important;
+  color: #B8B8B8 !important;
   font-weight: 800;
   font-size: 210px;
   line-height: 210px;
@@ -64,10 +64,9 @@ export default function Home({ history, user }) {
           md: 'container.md',
           lg: 'container.lg',
           xl: 'container.xl',
-        }}
-        color='gray.200'>
+        }}>
         <Heading as='h1' size='4xl'>
-          Listen to music with your friends.
+        Rock your party with the DJ.
         </Heading>
         <Text fontSize='xl' mt='12px'>
           Create a room or join a public room. Make friends through music.
@@ -83,7 +82,7 @@ export default function Home({ history, user }) {
           </Button>
         </ButtonGroup>
       </Container>
-      <VerticalHeading>TEMPORAL.DJ</VerticalHeading>
+      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
     </>
   );
 }
