@@ -10,7 +10,7 @@ export const config = {
   styles: {
     global: props => ({
       body: {
-        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+        color: props.colorMode === 'dark' ? 'gray.200' : 'gray.800',
       },
     }),
   },

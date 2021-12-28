@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ColorModeScript } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
-import store from './store';
 import { HelmetProvider } from 'react-helmet-async';
 import { config } from './theme';
+import store from './store';
 import App from './App';
 
 ReactDOM.render(
