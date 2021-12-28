@@ -11,6 +11,8 @@ import {
 } from './components/hoc/options';
 
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import ErrorNotFound from './pages/ErrorNotFound';
 
 import '@fontsource/poppins/100.css';
@@ -32,6 +34,8 @@ function App() {
         <Layout>
           <Switch>
             <Route path='/' exact component={Home} />
+            <Route path='/register' exact component={Register} />
+            <Route path='/login' exact component={Login} />
             <Route path='/' component={ErrorNotFound} />
           </Switch>
         </Layout>
