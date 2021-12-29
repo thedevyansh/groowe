@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
+import CreateRoomModal from '../../components/CreateRoomModal';
 
 const HorizontalHeading = styled.div`
   z-index: -1;
@@ -82,6 +83,7 @@ export default function Home({ history, user }) {
         </ButtonGroup>
       </Container>
       <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
+      <CreateRoomModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
