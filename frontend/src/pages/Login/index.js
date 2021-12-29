@@ -66,7 +66,7 @@ function Login() {
         <Heading textAlign='center' size='lg' padding='1rem'>
           Login to resume fun.
         </Heading>
-        <Box py='6' px={{ base: '4', md: '10' }} rounded={{ sm: 'lg' }}>
+        <Box py='6' px={{ base: '4', md: '10' }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing='6'>
               <FormControl isInvalid={errors.username}>
