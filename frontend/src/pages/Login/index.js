@@ -47,7 +47,7 @@ function Login() {
       if (res.type === 'user/login/rejected') {
         toast({
           title: 'Login error',
-          description: res?.error?.message ?? 'Please try again',
+          description: res?.error?.message ?? 'Please try again.',
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -66,9 +66,9 @@ function Login() {
         <Heading textAlign='center' size='lg' padding='1rem'>
           Login to resume fun.
         </Heading>
-        <Box py='10' px={{ base: '4', md: '10' }} rounded={{ sm: 'lg' }}>
+        <Box py='6' px={{ base: '4', md: '10' }} rounded={{ sm: 'lg' }}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing='8'>
+            <Stack spacing='6'>
               <FormControl isInvalid={errors.username}>
                 <FormLabel htmlFor='username'>Username</FormLabel>
                 <Input
