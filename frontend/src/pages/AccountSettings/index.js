@@ -68,8 +68,7 @@ function AccountSettings() {
           title: 'Account update error',
           description: res?.error?.message ?? 'Please try again',
           status: 'error',
-          duration: 3000,
-          isClosable: true,
+          duration: 2000,
         });
       } else if (res.type === 'user/update/fulfilled') {
         dispatch(authenticate());

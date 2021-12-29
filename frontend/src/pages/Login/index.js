@@ -49,8 +49,7 @@ function Login() {
           title: 'Login error',
           description: res?.error?.message ?? 'Please try again.',
           status: 'error',
-          duration: 3000,
-          isClosable: true,
+          duration: 2000,
         });
       } else if (res.type === 'user/login/fulfilled') {
         window.location.reload();
