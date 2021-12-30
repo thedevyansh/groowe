@@ -10,6 +10,8 @@ import {
   NON_LOGGED_ONLY,
 } from './components/hoc/options';
 
+import { SocketContext, socket } from './contexts/socket';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -31,36 +33,38 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <Layout>
-          <Switch>
-            <Route
-              path='/'
-              exact
-              component={withAuthorization(Home, PUBLIC_PAGE)}
-            />
-            <Route
-              path='/register'
-              exact
-              component={withAuthorization(Register, NON_LOGGED_ONLY)}
-            />
-            <Route
-              path='/login'
-              exact
-              component={withAuthorization(Login, NON_LOGGED_ONLY)}
-            />
-            <Route
-              path='/account'
-              exact
-              component={withAuthorization(AccountSettings, LOGGED_IN_ONLY)}
-            />
-            <Route
-              path='/'
-              component={withAuthorization(ErrorNotFound, PUBLIC_PAGE)}
-            />
-          </Switch>
-        </Layout>
-      </BrowserRouter>
+      <SocketContext.Provider value={socket}>
+        <BrowserRouter>
+          <Layout>
+            <Switch>
+              <Route
+                path='/'
+                exact
+                component={withAuthorization(Home, PUBLIC_PAGE)}
+              />
+              <Route
+                path='/register'
+                exact
+                component={withAuthorization(Register, NON_LOGGED_ONLY)}
+              />
+              <Route
+                path='/login'
+                exact
+                component={withAuthorization(Login, NON_LOGGED_ONLY)}
+              />
+              <Route
+                path='/account'
+                exact
+                component={withAuthorization(AccountSettings, LOGGED_IN_ONLY)}
+              />
+              <Route
+                path='/'
+                component={withAuthorization(ErrorNotFound, PUBLIC_PAGE)}
+              />
+            </Switch>
+          </Layout>
+        </BrowserRouter>
+      </SocketContext.Provider>
     </ChakraProvider>
   );
 }
