@@ -15,6 +15,7 @@ import { SocketContext, socket } from './contexts/socket';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Rooms from './pages/Rooms';
 import AccountSettings from './pages/AccountSettings';
 import ErrorNotFound from './pages/ErrorNotFound';
 
@@ -51,6 +52,11 @@ function App() {
                 path='/login'
                 exact
                 component={withAuthorization(Login, NON_LOGGED_ONLY)}
+              />
+              <Route
+                path='/rooms'
+                exact
+                component={withAuthorization(Rooms, PUBLIC_PAGE)}
               />
               <Route
                 path='/account'
