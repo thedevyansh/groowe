@@ -1,0 +1,39 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.customLook {
+  --tag-bg: var(--chakra-colors-blue-600);
+  --tag-hover: var(--chakra-colors-blue-500);
+  --tag-text-color: var(--chakra-colors-white);
+  --tags-border-color: var(--chakra-colors-whiteAlpha-300);
+  --tags-hover-border-color: var(--chakra-colors-whiteAlpha-400);
+  --tags-focus-border-color: var(--chakra-colors-blue-300);
+  --tag-text-color--edit: var(--chakra-colors-white);
+  --tag-remove-bg: var(--tag-hover);
+  --tag-pad: 2px 2px 2px 10px;
+  --tag-remove-btn-color: var(--chakra-colors-whiteAlpha-800);
+  --tag-remove-btn-bg--hover: var(--chakra-colors-whiteAlpha-400);
+  --tag-invalid-bg: var(--chakra-colors-red-500);
+  --input-color: var(--chakra-colors-white);
+  --placeholder-color: var(--chakra-colors-whiteAlpha-300);
+  --placeholder-color-focus: var(--chakra-colors-whiteAlpha-300);
+
+  /* box-shadow: 0 0 0 1px var(--chakra-colors-blue-300); */
+  height: var(--chakra-sizes-10);
+  border-radius: var(--chakra-radii-md);
+  -webkit-margin-end: var(--chakra-space-3);
+  margin-inline-end: var(--chakra-space-3);
+  margin-bottom: var(--chakra-space-2);
+  font-size: var(--chakra-fontSizes-md);
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.customLook .tagify__tag {
+  margin: auto 0 auto var(--chakra-space-4);
+}
