@@ -7,7 +7,7 @@ import withAuthorization from './components/hoc/withAuthorization';
 import {
   PUBLIC_PAGE,
   LOGGED_IN_ONLY,
-  PUBLIC_ONLY,
+  NON_LOGGED_ONLY,
 } from './components/hoc/options';
 
 import Home from './pages/Home';
@@ -34,11 +34,30 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/register' exact component={Register} />
-            <Route path='/login' exact component={Login} />
-            <Route path="/account" exact component={AccountSettings} />
-            <Route path='/' component={ErrorNotFound} />
+            <Route
+              path='/'
+              exact
+              component={withAuthorization(Home, PUBLIC_PAGE)}
+            />
+            <Route
+              path='/register'
+              exact
+              component={withAuthorization(Register, NON_LOGGED_ONLY)}
+            />
+            <Route
+              path='/login'
+              exact
+              component={withAuthorization(Login, NON_LOGGED_ONLY)}
+            />
+            <Route
+              path='/account'
+              exact
+              component={withAuthorization(AccountSettings, LOGGED_IN_ONLY)}
+            />
+            <Route
+              path='/'
+              component={withAuthorization(ErrorNotFound, PUBLIC_PAGE)}
+            />
           </Switch>
         </Layout>
       </BrowserRouter>
