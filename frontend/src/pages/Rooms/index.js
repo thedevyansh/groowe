@@ -11,7 +11,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 import CreateRoomModal from '../../components/CreateRoomModal';
 import RoomSearch from '../../components/RoomsSearch';
-// import RoomFilter from '../../components/RoomFilter';
+import RoomFilter from '../../components/RoomFilter';
 // import RoomList from '../../components/RoomList';
 
 function Room({ history }) {
@@ -39,7 +39,7 @@ function Room({ history }) {
         <title>Public Rooms - Temporal.DJ</title>
       </Helmet>
       <Container maxW='container.xl' p={8} overflow='auto'>
-        <Flex spacing={8} justifyContent='space-between'>
+        <Flex spacing={8} justifyContent='space-between' mb={10}>
           <Text fontSize='3xl' fontWeight='semibold' whiteSpace='nowrap'>
             Rooms
           </Text>
@@ -48,7 +48,7 @@ function Room({ history }) {
           </Button>
         </Flex>
         <RoomSearch />
-        {/* <RoomFilter /> */}
+        <RoomFilter />
         {/* <RoomList /> */}
       </Container>
       <CreateRoomModal isOpen={isOpen} onClose={onClose} />
