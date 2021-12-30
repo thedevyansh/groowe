@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet-async';
 import CreateRoomModal from '../../components/CreateRoomModal';
 import RoomSearch from '../../components/RoomsSearch';
 import RoomFilter from '../../components/RoomFilter';
-// import RoomList from '../../components/RoomList';
+import RoomList from '../../components/RoomList';
 
 function Room({ history }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,7 +49,7 @@ function Room({ history }) {
         </Flex>
         <RoomSearch />
         <RoomFilter />
-        {/* <RoomList /> */}
+        <RoomList />
       </Container>
       <CreateRoomModal isOpen={isOpen} onClose={onClose} />
     </>

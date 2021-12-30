@@ -43,7 +43,7 @@ function RoomFilter() {
   }, [selectedFilters, dispatch]);
 
   return (
-    <HStack my={4} spacing={4}>
+    <HStack my={4} spacing={4} mb={10}>
       <Text>Filter:</Text>
       <HStack wrap='wrap'>
         {genres.map((genre, index) => {

@@ -37,7 +37,6 @@ function RoomSearch() {
         placeholder='Search for rooms...'
         size='md'
         _placeholder={{ color: 'white' }}
-        _hover={{ backgroundColor: 'rgba(12, 15, 49, 0.2)' }}
       />
     </InputGroup>
   );
