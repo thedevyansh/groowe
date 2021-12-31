@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as userApi from '../services/user';
+import { populate } from './playlistsSlice';
 
 const initialState = {
   username: '',
@@ -12,7 +13,12 @@ export const authenticate = createAsyncThunk(
   'user/auth',
   async (_, thunkAPI) => {
     const response = await userApi.auth();
-
+    thunkAPI.dispatch(
+      populate({
+        playlists: response.data.playlist,
+        selectedPlaylist: response.data.selectedPlaylist,
+      })
+    );
     return response.data;
   }
 );
