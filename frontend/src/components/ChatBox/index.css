@@ -1,0 +1,14 @@
+.message-scrollbar {
+  scrollbar-color: rgb(3, 3, 19) rgba(12, 22, 45, 0.4) !important;
+  scrollbar-width: thin;
+}
+
+.message-scrollbar::-webkit-scrollbar {
+  background: rgba(12, 22, 45, 0.4) !important;
+  width: 8px;
+}
+
+.message-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(3, 3, 19) !important;
+  border-radius: 8px;
+}
