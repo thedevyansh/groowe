@@ -1,6 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as roomsApi from '../services/rooms';
 
+const initialState = {
+  data: [],
+  searchQuery: '*',
+  limit: 10,
+  skip: 0,
+  filters: [],
+  status: 'idle',
+  getMoreStatus: 'idle',
+  hasMore: true,
+};
+
 export const get = createAsyncThunk('rooms/get', async (params, thunkAPI) => {
   // If params didn't include a searchQuery, add current searchQuery to it
   if (params.searchQuery === undefined) {
@@ -24,17 +35,6 @@ export const update = createAsyncThunk(
     return response.data;
   }
 );
-
-const initialState = {
-  data: [],
-  searchQuery: '*',
-  limit: 10,
-  skip: 0,
-  filters: [],
-  status: 'idle',
-  getMoreStatus: 'idle',
-  hasMore: true,
-};
 
 export const roomsSlice = createSlice({
   name: 'rooms',
