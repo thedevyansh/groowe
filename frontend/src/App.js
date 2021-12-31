@@ -16,6 +16,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Rooms from './pages/Rooms';
+import Room from './pages/Room';
 import AccountSettings from './pages/AccountSettings';
 import ErrorNotFound from './pages/ErrorNotFound';
 
@@ -57,6 +58,11 @@ function App() {
                 path='/rooms'
                 exact
                 component={withAuthorization(Rooms, PUBLIC_PAGE)}
+              />
+              <Route
+                path='/room/:id'
+                exact
+                component={withAuthorization(Room, PUBLIC_PAGE)}
               />
               <Route
                 path='/account'
