@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet-async';
 import CreateRoomModal from '../../components/CreateRoomModal';
-import RoomSearch from '../../components/RoomsSearch';
+import RoomSearch from '../../components/RoomSearch';
 import RoomFilter from '../../components/RoomFilter';
 import RoomList from '../../components/RoomList';
 
