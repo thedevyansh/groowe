@@ -5,6 +5,7 @@ import currentRoomReducer from './slices/currentRoomSlice';
 import playlistsReducer from './slices/playlistsSlice';
 import queueReducer from './slices/queueSlice';
 import voteReducer from './slices/voteSlice';
+import songSearchReducer from './slices/songSearchSlice';
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     playlists: playlistsReducer,
     queue: queueReducer,
     vote: voteReducer,
+    songSearch: songSearchReducer,
   },
 });
