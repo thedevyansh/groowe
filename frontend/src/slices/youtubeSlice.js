@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { X_OFFSET, Y_OFFSET } from '../constants/youtube';
+import calculateVolume from '../utils/calculateVolume';
 
 const initialState = {
   boundingBox: {
@@ -26,8 +27,8 @@ export const youtubeSlice = createSlice({
       state.volume = payload;
     },
     changeVolumeOnMove: (state, { payload }) => {
-      // calculateVolume will be a utility function that computes the volume
-      // based on the position of client bubble from the youtube embed
+      // calculateVolume computes the volume based on the position of client bubble
+      // from the youtube embed
       const volume = calculateVolume(state.boundingBox, {
         x: payload.x + X_OFFSET,
         y: payload.y + Y_OFFSET,
