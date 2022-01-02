@@ -6,6 +6,7 @@ import playlistsReducer from './slices/playlistsSlice';
 import queueReducer from './slices/queueSlice';
 import voteReducer from './slices/voteSlice';
 import songSearchReducer from './slices/songSearchSlice';
+import youtubeReducer from './slices/youtubeSlice';
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     queue: queueReducer,
     vote: voteReducer,
     songSearch: songSearchReducer,
+    youtube: youtubeReducer,
   },
 });
