@@ -16,7 +16,7 @@ import { joinRoom } from '../../slices/currentRoomSlice';
 import { populate as populateQueue } from '../../slices/queueSlice';
 import { populate as populateVote } from '../../slices/voteSlice';
 import { changeVolumeOnMove } from '../../slices/youtubeSlice';
-import throttle from 'utils/throttle';
+import throttle from '../../utils/throttle';
 
 function ClientBubble(props) {
   const { isAuth, roomId, profilePicture, username, prefix, reaction } = props;
