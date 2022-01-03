@@ -6,6 +6,7 @@ import {
   InputLeftElement,
   Input,
   InputRightElement,
+  Button
 } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { search } from '../../slices/songSearchSlice';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Stack, Flex, useDisclosure, Text } from '@chakra-ui/react';
+import { Drawer, Stack, Flex, useDisclosure } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import LeftSide from './subcomponents/LeftSide';
 import Center from './subcomponents/Center';
