@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  playlists: {},
+  selectedPlaylist: null,
+};
+
 export const playlistsSlice = createSlice({
   name: 'playlists',
-  initialState: {
-    playlists: {},
-    selectedPlaylist: null,
-  },
+  initialState,
   reducers: {
     populate: (state, { payload }) => {
       const { playlists, selectedPlaylist } = payload;
@@ -13,12 +15,12 @@ export const playlistsSlice = createSlice({
       state.playlists = playlists;
       state.selectedPlaylist = selectedPlaylist ?? null;
     },
-    updatePlaylist: (state, { payload }) => {
+    createPlaylist: (state, { payload }) => {
       const { playlist } = payload;
 
       state.playlists[playlist.id] = playlist;
     },
-    createPlaylist: (state, { payload }) => {
+    updatePlaylist: (state, { payload }) => {
       const { playlist } = payload;
 
       state.playlists[playlist.id] = playlist;
@@ -52,7 +54,6 @@ export const playlistsSlice = createSlice({
       playlist.queue.splice(index, 1);
     },
   },
-  extraReducers: {},
 });
 
 export const {
