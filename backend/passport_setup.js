@@ -2,7 +2,7 @@ import passport from 'passport';
 import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 import { promisify } from 'util';
-import redisClient from './redis_client';
+import redisClient from './redis_client.js';
 
 const usersPrefix = 'user:';
 const jsonGetAsync = promisify(redisClient.json_get).bind(redisClient);

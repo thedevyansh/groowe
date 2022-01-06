@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "set DEBUG=backend:* & nodemon ./bin/www"
   },
   "dependencies": {
     "@socket.io/redis-adapter": "^7.1.0",
@@ -29,8 +29,6 @@
     "uuid": "^8.3.2",
     "youtube-v3-api": "^1.1.1"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.15"
   }

@@ -2,7 +2,7 @@ import redis, { createClient } from 'redis';
 import rejson from 'redis-rejson';
 import redisearch from 'redis-redisearch';
 import { promisify } from 'util';
-import config from './config';
+import config from './config.js';
 
 rejson(redis);
 redisearch(redis);
@@ -40,16 +40,20 @@ redisClient.on('ready', async () => {
     await del(socketKeys);
   }
 
-  // Create secondary index on fields for efficient searching
-  await ftcreateAsync(roomsIndex,
-    'PREFIX', '1', 'room:',
-    'SCHEMA',
-    'name', 'TEXT', 'SORTABLE',
-    'description', 'TEXT', 'SORTABLE',
-    'genres', 'TAG', 'SORTABLE',
-    'numMembers', 'NUMERIC', 'SORTABLE',
-    'private', 'TAG', 'SORTABLE'
-  )
+  try {
+    // Create secondary index on fields for efficient searching
+    await ftcreateAsync(roomsIndex,
+      'PREFIX', '1', 'room:',
+      'SCHEMA',
+      'name', 'TEXT', 'SORTABLE',
+      'description', 'TEXT', 'SORTABLE',
+      'genres', 'TAG', 'SORTABLE',
+      'numMembers', 'NUMERIC', 'SORTABLE',
+      'private', 'TAG', 'SORTABLE'
+    )
+  } catch(err) {
+    console.log(err)
+  }
 });
 
 redisClient.on('error', err => {
