@@ -18,6 +18,8 @@ import config from './config.js';
 import './passport_setup.js';
 import io from './socketio_server.js';
 
+import socketsChat from './sockets/messages.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -99,6 +101,10 @@ app.use((err, req, res, next) => {
 
 app.get('*', function (req, res, next) {
   res.sendFile(join(__dirname, 'public') + '/index.html');
+});
+
+io.on('connection', socket => {
+  socketsChat.onNewSocketConnection(socket);
 });
 
 export default app;
