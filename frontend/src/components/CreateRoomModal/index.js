@@ -39,7 +39,6 @@ function CreateRoomModal({ isOpen, onClose }) {
     formState: { isSubmitting, errors },
     handleSubmit,
   } = useForm();
-  const initialFocusRef = useRef(); // For auto focus input on open
   const tagsRef = useRef([]);
   const socket = useContext(SocketContext);
   const history = useHistory();
@@ -77,11 +76,7 @@ function CreateRoomModal({ isOpen, onClose }) {
   };
 
   return (
-    <Modal
-      initialFocusRef={initialFocusRef}
-      isOpen={isOpen}
-      onClose={onClose}
-      size='3xl'>
+    <Modal isOpen={isOpen} onClose={onClose} size='3xl'>
       <ModalOverlay />
       <ModalContent bg='gray.900'>
         <form onSubmit={handleSubmit(handleCreateRoom)}>
@@ -102,8 +97,6 @@ function CreateRoomModal({ isOpen, onClose }) {
                   {...register('roomName', {
                     validate: validateRoomName,
                   })}
-                  ref={initialFocusRef}
-                  type='tel'
                   placeholder='A fun name'
                   rounded='md'
                 />

@@ -231,7 +231,7 @@ function onNewSocketConnection(socket) {
     await removeUserFromRoom(req.user, roomId, onRoomChange(roomId));
     console.log(
       `disconnecting: ${roomId}`,
-      req?.user?.username ?? 'Unauthed user'
+      req?.user?.username ?? 'Unauthorized user'
     );
   });
 }
