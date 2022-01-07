@@ -1,7 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import io from '../socketio_server.js';
+import socketsRoom from './room.js';
 import { addMessage } from '../models/room.js';
-import { getConnectedRoomId } from './room.js';
+
+const { getConnectedRoomId } = socketsRoom;
 
 function onNewSocketConnection(socket) {
   const req = socket.request;

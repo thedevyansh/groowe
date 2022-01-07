@@ -18,6 +18,9 @@ import config from './config.js';
 import './passport_setup.js';
 import io from './socketio_server.js';
 
+import socketsRoom from './sockets/room.js';
+import * as socketsRoomQueue from './sockets/room_queue.js';
+import socketsVote from './sockets/vote.js';
 import socketsChat from './sockets/messages.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -104,6 +107,9 @@ app.get('*', function (req, res, next) {
 });
 
 io.on('connection', socket => {
+  socketsRoom.onNewSocketConnection(socket);
+  socketsRoomQueue.onNewSocketConnection(socket);
+  socketsVote.onNewSocketConnection(socket);
   socketsChat.onNewSocketConnection(socket);
 });
 
