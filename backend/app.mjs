@@ -11,6 +11,7 @@ import connectRedis from 'connect-redis';
 import { authRouter } from './routes/auth.js';
 import roomsRouter from './routes/rooms.js';
 import songRouter from './routes/song.js';
+import { playlistRouter } from './routes/playlist.js';
 
 import redisClient from './redis_client.js';
 import config from './config.js';
@@ -81,6 +82,7 @@ io.use(wrap(passport.session()));
 app.use('/api/auth', authRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/song', songRouter);
+app.use('/api/playlist', playlistRouter);
 
 // error handler
 app.use((err, req, res, next) => {
