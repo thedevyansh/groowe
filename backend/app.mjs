@@ -8,6 +8,8 @@ import passport from 'passport';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 
+import { authRouter } from './routes/auth.js';
+
 import redisClient from './redis_client.js';
 import config from './config.js';
 import './passport_setup.js';
@@ -74,9 +76,7 @@ io.use(wrap(sessionMiddleware));
 io.use(wrap(passport.initialize()));
 io.use(wrap(passport.session()));
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the backend...');
-});
+app.use('/api/auth', authRouter);
 
 // error handler
 app.use((err, req, res, next) => {
