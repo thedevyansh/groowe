@@ -65,7 +65,7 @@ function Vote() {
 
   return (
     <BottomLeft>
-      <HStack alignItems='flex-end'>
+      <HStack alignItems='flex-end' m={4}>
         <VStack>
           <Text>{likes}</Text>
           <IconButton

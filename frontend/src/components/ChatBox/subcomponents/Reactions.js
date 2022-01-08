@@ -9,7 +9,7 @@ const ReactionsContainer = styled(Flex)`
   justify-content: space-between;
   background-color: rgba(12, 22, 45, 0.5);
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 8px 0 0 8px;
   margin-bottom: 0.5rem;
 `;
 
@@ -62,8 +62,8 @@ function Reactions() {
         <Button
           isDisabled={buttonDisabled}
           variant='ghost'
-          onClick={() => submit('😈')}>
-          😈
+          onClick={() => submit('❤️')}>
+          ❤️
         </Button>
         <Button
           isDisabled={buttonDisabled}

@@ -9,7 +9,7 @@ function ErrorMessage() {
       textAlign='center'
       alignItems='center'
       justifyContent='center'>
-      <Heading>An error occured 🤯!</Heading>
+      <Heading>An error occured 🤯</Heading>
       <Text>Please refresh the page or select a different song/playlist.</Text>
     </Flex>
   );

@@ -9,7 +9,7 @@ function NextSongLoadingMessage() {
       textAlign='center'
       alignItems='center'
       justifyContent='center'>
-      <Heading>Playing the next song ⏭...</Heading>
+      <Heading>Playing the next song ⏭</Heading>
       <Progress size='xs' isIndeterminate />
     </Flex>
   );

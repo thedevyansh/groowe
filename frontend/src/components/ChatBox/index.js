@@ -3,7 +3,7 @@ import { SocketContext } from '../../contexts/socket';
 import { useSelector } from 'react-redux';
 import {
   Avatar,
-  Heading,
+  Text,
   HStack,
   IconButton,
   Input,
@@ -45,7 +45,7 @@ function ChatBox() {
     reset,
   } = useForm();
   const [messages, setMessages] = useState(initMessages);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const toast = useToast();
 
   useEffect(() => {
@@ -110,13 +110,13 @@ function ChatBox() {
     <BottomRight py='auto' minW='345px'>
       <Reactions />
       <ChatContainer
-        height={isOpen ? '460px' : '48px'}
-        maxH='460px'
+        height={isOpen ? '420px' : '48px'}
+        maxH='420px'
         minW='345px'
         shadow='base'
-        borderRadius='8px 8px 0 0'>
+        borderRadius='8px 0 0 0'>
         <HStack maxH='48px' justifyContent='space-between' px={4} py={2}>
-          <Heading fontSize='xl'>Chat</Heading>
+          <Text fontSize='lg'>Chat</Text>
           <IconButton
             onClick={onMinimizeChat}
             variant='ghost'

@@ -80,7 +80,7 @@ function Register() {
   return (
     <>
       <Helmet>
-        <title>Register - Temporal.dj</title>
+        <title>Register - Temporal.DJ</title>
       </Helmet>
       <Box maxW='md' mx='auto' py='5%'>
         <Heading textAlign='center' size='lg' padding='1rem'>

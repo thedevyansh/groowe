@@ -208,11 +208,11 @@ function YoutubePlayer({ isAuth, height, width }) {
     <>
       <Box
         position='absolute'
-        top='0'
+        top='15px'
         left='0'
         right='0'
         m='auto'
-        borderRadius='0 0 8px 8px'
+        borderRadius='8px'
         id='youtube-player'
       />
       <ErrorBox height={height} width={width} />

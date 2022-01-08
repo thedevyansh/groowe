@@ -4,8 +4,8 @@ export const config = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
   fonts: {
-    heading: `Poppins, ${base.fonts?.heading}`,
-    body: `Poppins, ${base.fonts?.body}`,
+    heading: `Rubik, ${base.fonts?.heading}`,
+    body: `Rubik, ${base.fonts?.body}`,
   },
   styles: {
     global: props => ({

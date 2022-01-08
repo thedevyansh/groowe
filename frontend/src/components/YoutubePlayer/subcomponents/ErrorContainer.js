@@ -7,14 +7,13 @@ function ErrorContainer({ height, width, borderColor, children }) {
       position='absolute'
       h={`${height}px`}
       w={`${width}px`}
-      top='0'
+      top='15px'
       left='0'
       right='0'
       m='auto'
-      bgColor='black'
-      borderRadius='0 0 8px 8px'
+      bgColor='rgba(12, 22, 45, 0.8)'
+      borderRadius='8px'
       border='1px solid'
-      borderTop='none'
       borderColor={borderColor}>
       {children}
     </Box>

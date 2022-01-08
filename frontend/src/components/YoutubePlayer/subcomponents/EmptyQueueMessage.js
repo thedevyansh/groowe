@@ -10,9 +10,9 @@ function EmptyQueueMessage() {
       alignItems="center"
       justifyContent="center"
     >
-      <Heading>Nobody is in the queue 😢.</Heading>
+      <Heading>Nobody is in the queue 😔</Heading>
       <Text>
-        Select a playlist and join the queue to get this party started!
+        Select a playlist and join the queue to get this party started.
       </Text>
     </Flex>
   );

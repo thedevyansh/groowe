@@ -87,7 +87,7 @@ function AccountSettings() {
       }}
       p={10}>
       <Helmet>
-        <title>My Account - Temporal.dj</title>
+        <title>My Account - Temporal.DJ</title>
       </Helmet>
       <chakra.form
         autoComplete='off'
