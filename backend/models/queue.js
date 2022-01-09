@@ -8,7 +8,6 @@ const lrangeAsync = promisify(redisClient.lrange).bind(redisClient);
 const lremAsync = promisify(redisClient.lrem).bind(redisClient);
 const rpushAsync = promisify(redisClient.rpush).bind(redisClient);
 const lpopAsync = promisify(redisClient.lpop).bind(redisClient);
-const lmoveAsync = promisify(redisClient.lmove).bind(redisClient);
 const lposAsync = promisify(redisClient.lpos).bind(redisClient);
 const llenAsync = promisify(redisClient.llen).bind(redisClient);
 
@@ -79,7 +78,8 @@ async function getNextSong(roomId) {
 
   while ((await llenAsync(queueKey)) > 0) {
     // move first user in queue to last in queue
-    const username = await lmoveAsync(queueKey, queueKey, 'LEFT', 'RIGHT');
+    const username = await lpopAsync(queueKey);
+    await rpushAsync(queueKey, username);
 
     if (!username) {
       return null;

@@ -8,10 +8,10 @@ rejson(redis);
 redisearch(redis);
 
 redis.addCommand('ft.aggregate');
-redis.addCommand('lmove');
 
 const redisClient = createClient({
   host: config.redisHost,
+  password: config.redisPassword,
   port: config.redisPort,
 });
 

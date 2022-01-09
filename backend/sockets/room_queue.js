@@ -53,7 +53,6 @@ async function startPlayingQueue(roomId) {
   const syncTimer = setInterval(async () => {
     // take difference for current duration
     io.to(roomId).emit('sync_song', { seekTime: Date.now() - startTime });
-    console.log(Date.now() - startTime);
   }, SYNC_INTERVAL_MS);
 
   queueTimers.set(roomId, { queueTimer, syncTimer });
