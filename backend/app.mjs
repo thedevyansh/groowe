@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import helmet from 'helmet';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
@@ -14,7 +15,6 @@ import songRouter from './routes/song.js';
 import { playlistRouter } from './routes/playlist.js';
 
 import redisClient from './redis_client.js';
-import config from './config.js';
 import './passport_setup.js';
 import io from './socketio_server.js';
 
@@ -22,6 +22,8 @@ import socketsRoom from './sockets/room.js';
 import * as socketsRoomQueue from './sockets/room_queue.js';
 import socketsVote from './sockets/vote.js';
 import socketsChat from './sockets/messages.js';
+
+import 'dotenv/config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +59,7 @@ app.use(
 );
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -65,7 +68,7 @@ app.use(express.static(join(__dirname, 'public')));
 const RedisStore = connectRedis(session);
 const sessionMiddleware = session({
   store: new RedisStore({ client: redisClient }),
-  secret: config.sessionSecret,
+  secret: process.env.SESSION_SECRET,
   name: 'sessionId',
   resave: false,
   saveUninitialized: false,
@@ -84,6 +87,9 @@ io.use(wrap(sessionMiddleware));
 io.use(wrap(passport.initialize()));
 io.use(wrap(passport.session()));
 
+app.get('/isServerAlive', (req, res) => {
+  res.send('Temporal.DJ server is active.');
+});
 app.use('/api/auth', authRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/song', songRouter);

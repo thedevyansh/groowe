@@ -3,6 +3,7 @@ import rejson from 'redis-rejson';
 import redisearch from 'redis-redisearch';
 import { promisify } from 'util';
 import config from './config.js';
+import 'dotenv/config.js';
 
 rejson(redis);
 redisearch(redis);
@@ -10,9 +11,9 @@ redisearch(redis);
 redis.addCommand('ft.aggregate');
 
 const redisClient = createClient({
-  host: config.redisHost,
-  password: config.redisPassword,
-  port: config.redisPort,
+  host: process.env.REDIS_HOST,
+  password: process.env.REDIS_PASSWORD,
+  port: parseInt(process.env.REDIS_PORT),
 });
 
 const ftcreateAsync = promisify(redisClient.ft_create).bind(redisClient);

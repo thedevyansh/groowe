@@ -1,8 +1,8 @@
 import { YoutubeDataAPI } from 'youtube-v3-api';
 import parseIsoDuration from 'parse-iso-duration';
-import config from '../config.js';
+import 'dotenv/config.js';
 
-const api = new YoutubeDataAPI(config.youtube_key);
+const api = new YoutubeDataAPI(process.env.YOUTUBE_KEY);
 
 async function searchVideos(query) {
   const response = await api.searchAll(query, 20, { type: 'video' });

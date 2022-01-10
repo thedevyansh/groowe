@@ -3,7 +3,7 @@ import passport from 'passport';
 import redisClient from '../redis_client.js';
 import { promisify } from 'util';
 import bcrypt from 'bcrypt';
-import config from '../config.js';
+import 'dotenv/config.js';
 
 const router = express.Router();
 
@@ -54,7 +54,10 @@ router.post('/register', async (req, res, next) => {
     return res.status(401).send();
   }
 
-  const passwordHash = await bcrypt.hash(password, config.passwordSaltRounds);
+  const passwordHash = await bcrypt.hash(
+    password,
+    parseInt(process.env.SALT_ROUNDS)
+  );
   const user = {
     username: username,
     password: passwordHash,
