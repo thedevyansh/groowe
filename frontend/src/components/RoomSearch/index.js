@@ -14,7 +14,7 @@ function RoomSearch() {
     dispatch(get(query));
   };
 
-  const debounceGetRooms = useCallback(debounce(getRooms, 400), []);
+  const debounceGetRooms = useCallback(debounce(getRooms, 400), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = e => {
     const variables = {

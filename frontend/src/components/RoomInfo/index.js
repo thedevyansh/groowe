@@ -2,15 +2,8 @@ import { useSelector } from 'react-redux';
 import {
   Box,
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Heading,
   Text,
-  Tooltip,
 } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
 
 export default function Simple() {
   const { data } = useSelector(state => state.currentRoom);
