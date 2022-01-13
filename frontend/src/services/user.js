@@ -1,21 +1,26 @@
 import axios from 'axios';
 
+const instance = axios.create({
+  baseURL: 'https://temporaldj.herokuapp.com',
+  withCredentials: true,
+});
+
 export const auth = () => {
-  return axios.get('/api/auth');
+  return instance.get('/api/auth');
 };
 
 export const login = request => {
-  return axios.post('/api/auth/login', request);
+  return instance.post('/api/auth/login', request);
 };
 
 export const register = request => {
-  return axios.post('/api/auth/register', request);
+  return instance.post('/api/auth/register', request);
 };
 
 export const logout = () => {
-  return axios.post('/api/auth/logout');
+  return instance.post('/api/auth/logout');
 };
 
 export const update = request => {
-  return axios.put('/api/auth/update', request);
+  return instance.put('/api/auth/update', request);
 };
