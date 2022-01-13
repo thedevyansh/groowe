@@ -1,33 +1,41 @@
 import axios from 'axios';
 
+const instance = axios.create({
+  baseURL: 'https://temporaldj.herokuapp.com',
+});
+
 export const create = request => {
-  return axios.post('/api/playlist/create', request);
+  return instance.post('/api/playlist/create', request);
 };
 
 export const addSong = (playlistId, request) => {
-  return axios.put(`/api/playlist/add/${playlistId}`, request);
+  return instance.put(`/api/playlist/add/${playlistId}`, request);
 };
 
 export const removeSong = (playlistId, request) => {
-  return axios.delete(`/api/playlist/remove/${playlistId}`, { data: request });
+  return instance.delete(`/api/playlist/remove/${playlistId}`, {
+    data: request,
+  });
 };
 
 export const deletePlaylist = playlistId => {
-  return axios.delete(`/api/playlist/delete/${playlistId}`);
+  return instance.delete(`/api/playlist/delete/${playlistId}`);
 };
 
 export const update = (playlistId, request) => {
-  return axios.put(`/api/playlist/update/${playlistId}`, { playlist: request });
+  return instance.put(`/api/playlist/update/${playlistId}`, {
+    playlist: request,
+  });
 };
 
 export const get = playlistId => {
-  return axios.get(`/api/playlist/get/${playlistId}`);
+  return instance.get(`/api/playlist/get/${playlistId}`);
 };
 
 export const select = playlistId => {
-  return axios.post(`/api/playlist/select/${playlistId}`);
+  return instance.post(`/api/playlist/select/${playlistId}`);
 };
 
 export const list = () => {
-  return axios.get(`/api/playlist/list`);
+  return instance.get(`/api/playlist/list`);
 };
