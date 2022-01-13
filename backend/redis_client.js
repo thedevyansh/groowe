@@ -2,7 +2,6 @@ import redis, { createClient } from 'redis';
 import rejson from 'redis-rejson';
 import redisearch from 'redis-redisearch';
 import { promisify } from 'util';
-import config from './config.js';
 import 'dotenv/config.js';
 
 rejson(redis);
@@ -23,7 +22,7 @@ const del = promisify(redisClient.del).bind(redisClient);
 export const roomsIndex = 'roomsIndex';
 
 redisClient.on('ready', async () => {
-  console.log(`Connected to Redis on ${config.redisHost}.`);
+  console.log(`Connected to Redis on ${process.env.REDIS_HOST}.`);
   // Delete stale data
   const roomKeys = await keysAsync('room:*');
   const queueKeys = await keysAsync('queue:*');

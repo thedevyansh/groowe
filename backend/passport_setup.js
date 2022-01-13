@@ -47,9 +47,9 @@ passport.use(
           return done(null, false);
         }
 
-        done(null, user);
+        return done(null, user);
       } catch (err) {
-        done(err);
+        return done(err);
       }
     }
   )
