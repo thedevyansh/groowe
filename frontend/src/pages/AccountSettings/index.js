@@ -119,8 +119,8 @@ function AccountSettings() {
                       onChange={handleAvatarUrlChange}
                     />
                     <InputRightElement width='4.5rem'>
-                      <Button h='1.75rem' size='sm' onClick={handleSaveAvatar}>
-                        Done
+                      <Button h='1.75rem' size='xs' onClick={handleSaveAvatar}>
+                        Preview
                       </Button>
                     </InputRightElement>
                   </InputGroup>

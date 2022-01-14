@@ -3,7 +3,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
-import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
@@ -61,23 +60,33 @@ app.use(
 app.use(logger('dev'));
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://temporaldj.netlify.app',
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
 
 const RedisStore = connectRedis(session);
-const sessionMiddleware = session({
+const sess = {
   store: new RedisStore({ client: redisClient }),
+  name: 'temporaldj.id',
   secret: process.env.SESSION_SECRET,
-  name: 'sessionId',
   resave: false,
   saveUninitialized: false,
-});
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+  },
+};
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1);
+  sess.cookie.secure = true;
+  sess.cookie.sameSite = 'none';
+}
+
+const sessionMiddleware = session(sess);
 
 app.use(sessionMiddleware);
 app.use(passport.initialize());
@@ -91,9 +100,6 @@ io.use(wrap(sessionMiddleware));
 io.use(wrap(passport.initialize()));
 io.use(wrap(passport.session()));
 
-app.get('/isServerAlive', (req, res) => {
-  res.send('Temporal.DJ server is active.');
-});
 app.use('/api/auth', authRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/song', songRouter);

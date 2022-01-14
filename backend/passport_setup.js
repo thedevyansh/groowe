@@ -57,13 +57,13 @@ passport.use(
 
 // Session for authenticated user
 passport.serializeUser((user, done) => {
-  done(null, user.username);
+  return done(null, user.username);
 });
 
 passport.deserializeUser(async (username, done) => {
   try {
     const user = await jsonGetAsync(getUserKey(username));
-    done(null, JSON.parse(user));
+    return done(null, JSON.parse(user));
   } catch (err) {
     done(err);
   }
