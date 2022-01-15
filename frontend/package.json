@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@yaireo/tagify": "^4.1.1",
     "axios": "^0.21.1",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^4.1.9",
     "he": "^1.2.0",
     "immer": "^9.0.6",

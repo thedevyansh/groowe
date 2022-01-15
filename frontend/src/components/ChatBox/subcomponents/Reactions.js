@@ -44,14 +44,14 @@ function Reactions() {
         <Button
           isDisabled={buttonDisabled}
           variant='ghost'
-          onClick={() => submit('🔥')}>
-          🔥
+          onClick={() => submit('💃')}>
+          💃
         </Button>
         <Button
           isDisabled={buttonDisabled}
           variant='ghost'
-          onClick={() => submit('😃')}>
-          😃
+          onClick={() => submit('🔥')}>
+          🔥
         </Button>
         <Button
           isDisabled={buttonDisabled}
