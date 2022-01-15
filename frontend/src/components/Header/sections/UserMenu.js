@@ -8,7 +8,8 @@ import {
   MenuGroup,
   MenuDivider,
 } from '@chakra-ui/react';
-import { SettingsIcon, LockIcon } from '@chakra-ui/icons';
+import { SettingsIcon } from '@chakra-ui/icons';
+import { FaSignOutAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function UserMenu({ isAuth, username }) {
@@ -28,7 +29,7 @@ function UserMenu({ isAuth, username }) {
             </Link>
           </MenuGroup>
           <MenuDivider />
-          <MenuItem icon={<LockIcon />} onClick={handleLogout}>
+          <MenuItem icon={<FaSignOutAlt />} onClick={handleLogout}>
             Logout
           </MenuItem>
         </MenuList>

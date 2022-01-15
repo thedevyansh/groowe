@@ -1,6 +1,7 @@
 import React from 'react';
-import { Avatar, MenuButton, HStack, Text } from '@chakra-ui/react';
+import { Avatar, MenuButton, HStack, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import {FaSignInAlt, FaUserAlt} from 'react-icons/fa'
 
 const UserIcon = ({ isLoaded, isAuth, image }) => {
   if (!isLoaded) {
@@ -13,12 +14,16 @@ const UserIcon = ({ isLoaded, isAuth, image }) => {
     );
   } else {
     return (
-      <HStack spacing={8}>
-        <Link to='/login'>
-          <Text colorScheme='blue'>Login</Text>
-        </Link>
+      <HStack>
         <Link to='/register'>
-          <Text colorScheme='blue'>Register</Text>
+          <Button leftIcon={<FaUserAlt />} variant='ghost' fontWeight='10px'>
+            Register
+          </Button>
+        </Link>
+        <Link to='/login'>
+          <Button leftIcon={<FaSignInAlt />} variant='ghost' fontWeight='10px'>
+            Login
+          </Button>
         </Link>
       </HStack>
     );

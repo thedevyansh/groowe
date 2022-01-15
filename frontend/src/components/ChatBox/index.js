@@ -45,7 +45,7 @@ function ChatBox() {
     reset,
   } = useForm();
   const [messages, setMessages] = useState(initMessages);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toast = useToast();
 
   useEffect(() => {

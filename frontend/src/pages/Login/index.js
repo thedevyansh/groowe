@@ -63,7 +63,7 @@ function Login() {
       </Helmet>
       <Box maxW='md' mx='auto' py='5%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
-          Login to resume fun.
+          Login to resume fun
         </Heading>
         <Box py='6' px={{ base: '4', md: '10' }}>
           <form onSubmit={handleSubmit(onSubmit)}>

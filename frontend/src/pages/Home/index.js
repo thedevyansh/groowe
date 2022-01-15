@@ -16,15 +16,16 @@ import CreateRoomModal from '../../components/CreateRoomModal';
 const HorizontalHeading = styled.div`
   z-index: -1;
   color: #B8B8B8 !important;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 210px;
+  font-family: Poppins;
   line-height: 210px;
   mix-blend-mode: overlay;
   overflow: hidden;
   opacity: 0.1;
   position: fixed;
   left: -20px;
-  bottom: -30px;
+  bottom: -40px;
   padding: 0;
   margin: 0;
   pointer-events: none;
@@ -68,10 +69,10 @@ export default function Home({ history, user }) {
         <Heading as='h1' size='4xl'>
         Rock your party with the DJ.
         </Heading>
-        <Text fontSize='xl' mt='12px'>
+        <Text fontSize='xl' mt='16px'>
           Create a room or join a public room. Make friends through music.
         </Text>
-        <ButtonGroup variant='outline' spacing='6' mt='48px'>
+        <ButtonGroup variant='outline' spacing='4' mt='50px'>
           <Link to='/rooms'>
             <Button colorScheme='blue' variant='solid' size='lg'>
               View Rooms

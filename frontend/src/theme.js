@@ -4,7 +4,7 @@ export const config = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
   fonts: {
-    heading: `Rubik, ${base.fonts?.heading}`,
+    heading: `Poppins, ${base.fonts?.heading}`,
     body: `Rubik, ${base.fonts?.body}`,
   },
   styles: {
