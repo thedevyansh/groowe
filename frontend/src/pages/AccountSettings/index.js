@@ -95,15 +95,16 @@ function AccountSettings() {
         overflow={{ sm: 'hidden' }}>
         <Stack px={4} py={4} p={{ sm: 6 }}>
           <Text fontSize='xl' fontWeight='semibold'>
-            Username - {username}
+            Change profile picture 
           </Text>
           <Divider />
           <FormControl isInvalid={errors.profilePicture}>
             <FormLabel
               htmlFor='profilepicture-url'
-              fontSize='lg'
-              fontWeight='md'>
-              Profile Picture
+              fontSize='md'
+              fontWeight='md'
+              color='gray.300'>
+              User name: {username}
             </FormLabel>
             <Flex alignItems='center' mt={1}>
               <Avatar boxSize={16} bg='gray.800' src={avatarUrlState} />

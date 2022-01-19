@@ -110,8 +110,8 @@ function ChatBox() {
     <BottomRight py='auto' minW='345px'>
       <Reactions />
       <ChatContainer
-        height={isOpen ? '420px' : '48px'}
-        maxH='420px'
+        height={isOpen ? '480px' : '48px'}
+        maxH='480px'
         minW='345px'
         shadow='base'
         borderRadius='8px 0 0 0'>

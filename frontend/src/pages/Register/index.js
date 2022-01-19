@@ -33,11 +33,23 @@ function Register() {
   const [passwordValue, setPasswordValue] = useState('');
 
   const validateUsername = value => {
-    return value ? true : 'Enter your username';
+    if (value) {
+      if (!/^\w+$/.test(value)) {
+        return 'Username can only contain A-Z, a-z, 0-9, _';
+      }
+      return true;
+    }
+    return 'Enter your username';
   };
 
   const validatePassword = value => {
-    return value ? true : 'Enter your password';
+    if (value) {
+      if (value.length < 6) {
+        return 'Password length must be atleast 6';
+      }
+      return true;
+    }
+    return 'Enter your password';
   };
 
   const validateConfirmPassword = value => {

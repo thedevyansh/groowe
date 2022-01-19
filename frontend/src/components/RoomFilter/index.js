@@ -43,23 +43,22 @@ function RoomFilter() {
   }, [selectedFilters, dispatch]);
 
   return (
-    <HStack my={4} spacing={4} mb={10}>
-      <Text>Filter:</Text>
-      <HStack wrap='wrap'>
-        {genres.map((genre, index) => {
-          const isSelected = selectedFilters.includes(genre);
-          return (
-            <Button
-              key={index}
-              onClick={() => selectFilter(genre)}
-              colorScheme={isSelected ? 'blue' : 'gray'}
-              variant='solid'
-              size='sm'>
-              {genre}
-            </Button>
-          );
-        })}
-      </HStack>
+    <HStack wrap='wrap' mb={10}>
+      <Text mt={2}>Filters: </Text>
+      {genres.map((genre, index) => {
+        const isSelected = selectedFilters.includes(genre);
+        return (
+          <Button
+            key={index}
+            onClick={() => selectFilter(genre)}
+            colorScheme={isSelected ? 'blue' : 'gray'}
+            variant='solid'
+            size='sm'
+            style={{ marginTop: '10px' }}>
+            {genre}
+          </Button>
+        );
+      })}
     </HStack>
   );
 }

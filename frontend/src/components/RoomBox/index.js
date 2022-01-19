@@ -283,7 +283,7 @@ function RoomBox(props) {
         <title>{`${currentRoom?.data?.name} - Temporal.DJ`}</title>
       </Helmet>
       <LeaveRoomButton />
-      <YoutubePlayer isAuth={authenticated} height='350' width='580' />
+      <YoutubePlayer isAuth={authenticated} height='400' width='680' />
       <AnimatePresence>
         {Object.entries(bubblesData).map(([key, val]) => (
           <Bubble
