@@ -16,6 +16,7 @@ const redisClient = createClient({
 });
 
 const ftcreateAsync = promisify(redisClient.ft_create).bind(redisClient);
+const ftInfoAsync = promisify(redisClient.ft_info).bind(redisClient);
 const keysAsync = promisify(redisClient.keys).bind(redisClient);
 const del = promisify(redisClient.del).bind(redisClient);
 
@@ -40,24 +41,35 @@ redisClient.on('ready', async () => {
     await del(socketKeys);
   }
 
+  let indexExists = false;
+
   try {
-    // Create secondary index on fields for efficient searching
-    await ftcreateAsync(roomsIndex,
-      'PREFIX', '1', 'room:',
-      'SCHEMA',
-      'name', 'TEXT', 'SORTABLE',
-      'description', 'TEXT', 'SORTABLE',
-      'genres', 'TAG', 'SORTABLE',
-      'numMembers', 'NUMERIC', 'SORTABLE',
-      'private', 'TAG', 'SORTABLE'
-    )
-  } catch(err) {
-    console.log(err)
+    await ftInfoAsync(roomsIndex);
+    indexExists = true;
+  } catch (err) {
+    console.log('Rooms index does not exist. Creating index...');
+  }
+
+  try {
+    if (!indexExists) {
+      // Create secondary index on fields for efficient searching
+      await ftcreateAsync(roomsIndex,
+        'PREFIX', '1', 'room:',
+        'SCHEMA',
+        'name', 'TEXT', 'SORTABLE',
+        'description', 'TEXT', 'SORTABLE',
+        'genres', 'TAG', 'SORTABLE',
+        'numMembers', 'NUMERIC', 'SORTABLE',
+        'private', 'TAG', 'SORTABLE'
+      )
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 
 redisClient.on('error', err => {
-    console.error(err);
-  });  
+  console.error(err);
+});
 
 export default redisClient;
