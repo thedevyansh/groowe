@@ -1,3 +1,9 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3685488f-2c4e-49fb-a435-55f3e6aa7dae/deploy-status)](https://app.netlify.com/sites/temporaldj/deploys)
+![GitHub last commit](https://img.shields.io/github/last-commit/thedevyansh/temporaldj)
+![Lines of code](https://img.shields.io/tokei/lines/github/thedevyansh/temporaldj)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thedevyansh/temporaldj)
+
+
 !['Temporal.DJ Logo'](snapshots/temporalDjLogo.png)
 
 # Temporal.DJ
@@ -8,7 +14,7 @@
 
 * Listen to the same songs with your buddies simultaneously.
 * Interact through instant messaging, proximity audio, reactions and voting.
-* A fair queue system which ensures everyone's song choices gets played.
+* A fair queue mechanism which ensures everyone's song choices gets played.
 * Smooth user interface.
 
 ## Tech Stack
@@ -20,11 +26,11 @@
 
 Temporal.DJ is based on the monolithic architecture. The client communicates with the `Express.js` server through HTTP requests and `Socket.io` events. The server communicate with the YouTube API to allow users to search Youtube for songs and the Redis database to handle storing & retrieving data and searching for rooms. The Redis Adapter relies on Redis Pub/Sub mechanism which ensures horizontal scaling by adding multiple instances of the server and database.
 
-An overview of the core constructs is given below:
+An overview of the application core constructs is given below:
 
 ### Rooms 
 
-Users can create rooms where others can join. A room is a place where multiple people can listen to the same songs together, at the same time. Creation of a room emits a `Socket.io` event that generates new room details on the server/database which are send back to the client. Public rooms can be searched and joined.
+Users can create rooms where others can join. A room is a place where multiple people can listen to the same songs together, at the same time. Creation of a room emits a `Socket.io` event that generates new room details on the server/database which are send back to the client. Public rooms can then be searched and joined.
 
 Creating a room
 
@@ -46,7 +52,7 @@ The queue mechanism is handled through `Socket.io` events. Events will be emitte
 
 ### Playlists
 
-A playlist is a collection of songs.Songs are played through playlists created by users. Users can freely add or remove songs from their playlists and rearrange the order of their songs. Playlists help facilitate the queue system of Temporal.DJ.
+A playlist is a collection of songs. Songs are played through playlists created by users. Users can freely add or remove songs from their playlists and rearrange the order of their songs. Playlists help facilitate the queue mechanism of Temporal.DJ.
 
 !['Playlists'](snapshots/playlists.png)
 
@@ -67,6 +73,7 @@ Users can like or dislike the current song. This is also handled through `Socket
         - playlist
         - selectedPlaylist
     - Commands:
+    <br /><br />
     > #### To create a new user or update user data:
     > JSON.SET user:\${username} \${path} \${jsonObject}
     >
@@ -78,6 +85,7 @@ Users can like or dislike the current song. This is also handled through `Socket
     - Type: `string`
     - Data: Stores session data for authentication.
     - Commands:
+    <br /><br />
     > #### To reate a new session:
     > SET sess:\${sessionId} \${data}
     >
@@ -106,6 +114,7 @@ Users can like or dislike the current song. This is also handled through `Socket
         - numMembers: `NUMERIC`
         - private: `TAG`
     - Commands:
+    <br /><br />
     > #### To get JSON representation of this room:
     > HGET \${roomId} json
     >
@@ -120,9 +129,10 @@ Users can like or dislike the current song. This is also handled through `Socket
 
 - Socket
     - Prefix: `socket:`
-    - Type: `STRING`
+    - Type: `string`
     - Data: The username that this socket belongs to.
     - Commands:
+    <br /><br />
     > #### To create a new socket:
     > SET socket:\${socketId} \${username}
     >
@@ -134,9 +144,10 @@ Users can like or dislike the current song. This is also handled through `Socket
 
 - User queue
     - Prefix: `queue:`
-    - Type: `LIST`
+    - Type: `list`
     - Data: A list of usernames of users in the queue of the associated room.
     - Commands:
+    <br /><br />
     > #### To add user to queue or create queue:
     > RPUSH queue:\${roomId} \${username}
     >
@@ -155,6 +166,7 @@ Users can like or dislike the current song. This is also handled through `Socket
     - Type: `list`
     - Data: JSON-stringified objects, with fields `id`, `timeSent`, `text`, `sender` (which contains fields `username` and `profilePicture`).
     - Commands:
+    <br /><br />
     > #### To add a new message to the room's message history:
     > LPUSH message:\${messagesId} \${data}
     >
@@ -171,14 +183,14 @@ Users can like or dislike the current song. This is also handled through `Socket
 I used the [redislab/rejson](https://hub.docker.com/r/redislabs/rejson/) and [redislab/redisearch](https://hub.docker.com/r/redislabs/redisearch/) Docker images to setup Redis modules.
 
 
-1. In the root directory of **frontend**, type: `npm install` to install frontend dependencies.
+1. In the root directory of **frontend**, type: `npm install` to install dependencies.
 2. In the root directory of **backend**, create a `.env` file with the following contents:
 ```dosini
 REDIS_HOST=localhost    
 REDIS_PASSWORD=your_password_for_redis_here
 REDIS_PORT=default(6379)_or_custom_port
 SALT_ROUNDS=10
-SESSION_SECRET=REDIS_PORT=your_session_secret
+SESSION_SECRET=your_session_secret
 YOUTUBE_KEY=your_youtube_api_key
 ```
 |Property|Description|
@@ -189,7 +201,7 @@ YOUTUBE_KEY=your_youtube_api_key
 |SALT_ROUNDS|Number of salt rounds for bcrypt|
 |SESSION_SECRET|Secret for session cookies to authenticate users |
 |YOUTUBE_KEY|Your YouTube API key|
-3. In the root directory of *backend*, type: `npm install` to install backend dependencies.
-4. Run `npm start` in root directory of *backend.*
-5. Run `npm start` in root directory of *frontend.*
+3. In the root directory of **backend**, type: `npm install` to install dependencies.
+4. Run `npm start` in root directory of **backend.**
+5. Run `npm start` in root directory of **frontend.**
 6. Your app should be running at localhost:3000.
