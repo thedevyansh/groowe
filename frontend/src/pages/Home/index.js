@@ -40,7 +40,7 @@ export default function Home({ history, user }) {
       onOpen();
     } else {
       toast({
-        title: 'Please login first.',
+        title: 'Please login first',
         status: 'info',
         duration: '2000',
         position: 'top',
