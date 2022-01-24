@@ -3,9 +3,6 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/thedevyansh/temporaldj)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thedevyansh/temporaldj)
 
-
-!['Temporal.DJ Logo'](snapshots/temporalDjLogo.png)
-
 # Temporal.DJ
 
 !['Homepage'](snapshots/home.png)
