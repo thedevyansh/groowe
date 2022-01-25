@@ -21,6 +21,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 import { Link as ReactLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { HorizontalHeading } from '../../horizontalHeading';
 
 const validateUsername = value => {
   return value ? true : 'Enter your username';
@@ -121,6 +122,7 @@ function Login() {
           </form>
         </Box>
       </Box>
+      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
     </>
   );
 }

@@ -9,27 +9,9 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
 import CreateRoomModal from '../../components/CreateRoomModal';
-
-const HorizontalHeading = styled.div`
-  z-index: -1;
-  color: #B8B8B8 !important;
-  font-weight: 900;
-  font-size: 210px;
-  font-family: Poppins;
-  line-height: 210px;
-  mix-blend-mode: overlay;
-  overflow: hidden;
-  opacity: 0.1;
-  position: fixed;
-  left: -20px;
-  bottom: -40px;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-`;
+import { HorizontalHeading } from '../../horizontalHeading';
 
 export default function Home({ history, user }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,7 +49,7 @@ export default function Home({ history, user }) {
           xl: 'container.xl',
         }}>
         <Heading as='h1' size='4xl'>
-        Rock your party with the DJ.
+          Rock your party with the DJ.
         </Heading>
         <Text fontSize='xl' mt='16px'>
           Create a room or join a public room. Make friends through music.

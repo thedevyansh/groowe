@@ -21,6 +21,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 import { Link as ReactLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import {HorizontalHeading} from '../../horizontalHeading'
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -182,6 +183,7 @@ function Register() {
           </form>
         </Box>
       </Box>
+      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
     </>
   );
 }
