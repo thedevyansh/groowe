@@ -23,6 +23,7 @@ import {
 } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
+import { HorizontalHeading } from '../../horizontalHeading';
 
 const validateAvatar = value => {
   return value.match(
@@ -95,7 +96,7 @@ function AccountSettings() {
         overflow={{ sm: 'hidden' }}>
         <Stack px={4} py={4} p={{ sm: 6 }}>
           <Text fontSize='xl' fontWeight='semibold'>
-            Change profile picture 
+            Change profile picture
           </Text>
           <Divider />
           <FormControl isInvalid={errors.profilePicture}>
@@ -154,6 +155,7 @@ function AccountSettings() {
           </Button>
         </Box>
       </chakra.form>
+      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
     </Container>
   );
 }

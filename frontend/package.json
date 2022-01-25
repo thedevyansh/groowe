@@ -27,6 +27,7 @@
     "react-helmet-async": "^1.0.9",
     "react-hook-form": "^7.3.4",
     "react-icons": "^3.11.0",
+    "react-loader-spinner": "^5.1.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",

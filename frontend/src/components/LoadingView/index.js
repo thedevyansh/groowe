@@ -1,15 +1,15 @@
 import React from 'react';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
+import { BallTriangle } from 'react-loader-spinner';
 
 function LoadingView() {
   return (
     <Center h='65vh'>
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.300'
-        size='xl'
+      <BallTriangle
+        color='#90CCF4'
+        ariaLabel='loading...'
+        height={60}
+        width={60}
       />
     </Center>
   );
