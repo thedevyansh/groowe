@@ -15,7 +15,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  useToast,
 } from '@chakra-ui/react';
 
 const validateEmail = value => {
@@ -32,10 +31,9 @@ function SendMessageModal({ isOpen, onClose }) {
     formState: { isSubmitting, errors },
     handleSubmit,
   } = useForm();
-  const toast = useToast();
 
   const handleSendMessage = values => {
-    onClose()
+    onClose();
   };
 
   return (
