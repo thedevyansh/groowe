@@ -16,8 +16,7 @@ function MaintenancePage() {
         <Heading>Oh hi there! 👋</Heading>
         <Text textAlign='center' mt={2} mb={4}>
           Temporal.DJ is shy enough to show up every time. Shoot us a message,
-          and we'll bring it back
-          to you in no time :)
+          and we'll bring it back to you in no time :)
         </Text>
         <Button
           colorScheme='blue'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Stack,
@@ -15,10 +15,12 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  useToast,
 } from '@chakra-ui/react';
+import emailjs from '@emailjs/browser';
 
-const validateEmail = value => {
-  return value ? true : 'Email is required';
+const validateName = value => {
+  return value ? true : 'Name is required';
 };
 
 const validateMessage = value => {
@@ -26,6 +28,8 @@ const validateMessage = value => {
 };
 
 function SendMessageModal({ isOpen, onClose }) {
+  const form = useRef();
+  const toast = useToast();
   const {
     register,
     formState: { isSubmitting, errors },
@@ -33,6 +37,32 @@ function SendMessageModal({ isOpen, onClose }) {
   } = useForm();
 
   const handleSendMessage = values => {
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
+        form.current,
+        process.env.REACT_APP_USER_ID
+      )
+      .then(
+        result => {
+          toast({
+            title: 'Message received',
+            description:
+              "We've got your message. Temporal.DJ will be live again soon.",
+            status: 'success',
+            duration: 6000,
+          });
+        },
+        error => {
+          toast({
+            title: 'Error',
+            description: 'An error occured. Please try again later.',
+            status: 'error',
+            duration: 6000,
+          });
+        }
+      );
     onClose();
   };
 
@@ -40,31 +70,29 @@ function SendMessageModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} onClose={onClose} size='xl'>
       <ModalOverlay />
       <ModalContent bg='gray.900'>
-        <form onSubmit={handleSubmit(handleSendMessage)}>
+        <form ref={form} onSubmit={handleSubmit(handleSendMessage)}>
           <ModalHeader>Send a message!</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack px={4} py={5} spacing={5} p={{ sm: 6 }}>
-              <FormControl isInvalid={errors.email}>
+              <FormControl isInvalid={errors.name}>
                 <FormLabel
-                  htmlFor='email'
+                  htmlFor='name'
                   fontSize='sm'
                   fontWeight='md'
                   color='gray.50'>
-                  Email
+                  Name
                 </FormLabel>
                 <Input
-                  name='email'
-                  id='email'
-                  type='email'
-                  {...register('email', {
-                    validate: validateEmail,
+                  name='name'
+                  {...register('name', {
+                    validate: validateName,
                   })}
-                  placeholder='Your email'
+                  placeholder='Your name'
                   rounded='md'
                 />
                 <FormErrorMessage>
-                  {errors.email && errors.email.message}
+                  {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
 

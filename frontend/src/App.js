@@ -7,8 +7,7 @@ import MaintenancePage from './MaintenancePage';
 
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
-import '@fontsource/rubik/400.css';
-import '@fontsource/rubik/700.css';
+import '@fontsource/rubik/400.css'; 
 
 const GlobalStyles = css`
   /*
