@@ -38,6 +38,9 @@ export const queueSlice = createSlice({
     dequeue: (state, { payload }) => {
       state.queue = state.queue.filter(username => username !== payload);
     },
+    updateQueue: (state, { payload }) => {
+      state.queue = payload;
+    },
     changeCurrentSong: (state, { payload }) => {
       state.currentSong = payload;
     },
@@ -53,6 +56,7 @@ export const {
   leaveQueue,
   enqueue,
   dequeue,
+  updateQueue,
   changeCurrentSong,
   reset,
 } = queueSlice.actions;
