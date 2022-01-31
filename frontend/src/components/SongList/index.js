@@ -82,9 +82,9 @@ function SongList() {
       <Center height='475px'>
         <Spinner
           thickness='4px'
-          speed='0.55s'
+          speed='0.65s'
           emptyColor='gray.200'
-          color='blue.300'
+          color='blue:300'
           size='xl'
         />
       </Center>
