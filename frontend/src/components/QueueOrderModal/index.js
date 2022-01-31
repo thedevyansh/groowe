@@ -38,7 +38,12 @@ function QueueOrderModal({ isOpen, onClose, username, queue }) {
                         <Avatar size='xs'>
                           <AvatarBadge boxSize='1em' bg='green.500' />
                         </Avatar>
-                        <Text>{user === username ? 'You' : user}</Text>
+                        <Text
+                          style={{
+                            fontWeight: `${index === 0 ? 'bold' : ''}`,
+                          }}>
+                          {user === username ? 'You' : user}
+                        </Text>
                       </HStack>
                     </ListItem>
                   );
