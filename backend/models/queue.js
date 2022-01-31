@@ -8,7 +8,6 @@ const lrangeAsync = promisify(redisClient.lrange).bind(redisClient);
 const lremAsync = promisify(redisClient.lrem).bind(redisClient);
 const rpushAsync = promisify(redisClient.rpush).bind(redisClient);
 const lpopAsync = promisify(redisClient.lpop).bind(redisClient);
-const rpopAsync = promisify(redisClient.rpop).bind(redisClient);
 const lposAsync = promisify(redisClient.lpos).bind(redisClient);
 const llenAsync = promisify(redisClient.llen).bind(redisClient);
 
@@ -80,10 +79,11 @@ async function getNextSong(roomId) {
   while ((await llenAsync(queueKey)) > 0) {
     // move first user in queue to last in queue
     const username = await lpopAsync(queueKey);
+    await rpushAsync(queueKey, username);
+
     if (!username) {
       return null;
     }
-    await rpushAsync(queueKey, username);
 
     const userKey = getUserKey(username);
     let selectedPlaylist = null;
@@ -97,7 +97,7 @@ async function getNextSong(roomId) {
     }
 
     if (!selectedPlaylist) {
-      await rpopAsync(queueKey);
+      await lpopAsync(queueKey);
       io.to(roomId).emit('dequeued', username);
       continue;
     }
@@ -115,7 +115,7 @@ async function getNextSong(roomId) {
     }
 
     if (!nextSong) {
-      await rpopAsync(queueKey);
+      await lpopAsync(queueKey);
       io.to(roomId).emit('dequeued', username);
       continue;
     }
@@ -128,13 +128,6 @@ async function getNextSong(roomId) {
     song = JSON.parse(nextSong);
     // attach username to song to send to client later
     song.username = username;
-
-    // update the queue on frontend to show whose song will be played next
-    io.to(roomId).emit(
-      'update_queue',
-      await lrangeAsync(getQueueKey(roomId), 0, -1)
-    );
-
     break;
   }
 
