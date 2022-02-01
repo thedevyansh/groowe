@@ -2,7 +2,12 @@ import io from '../socketio_server.js';
 import { nanoid } from 'nanoid';
 import { promisify } from 'util';
 import redisClient from '../redis_client.js';
-import { removeFromQueue, getQueue, deleteQueue } from '../models/queue.js';
+import {
+  getQueueKey,
+  removeFromQueue,
+  getQueue,
+  deleteQueue,
+} from '../models/queue.js';
 import {
   getRoomKey,
   isRoomValid,
@@ -16,6 +21,7 @@ const hsetAsync = promisify(redisClient.hset).bind(redisClient);
 const getAsync = promisify(redisClient.get).bind(redisClient);
 const setAsync = promisify(redisClient.set).bind(redisClient);
 const delAsync = promisify(redisClient.del).bind(redisClient);
+const lrangeAsync = promisify(redisClient.lrange).bind(redisClient);
 
 const socketPrefix = 'socket:';
 
@@ -63,6 +69,12 @@ function onRoomChange(roomId) {
 
       console.log('user left');
       await removeFromQueue(roomId, userLeft);
+
+      // update the queue on frontend to reflect the user is no longer in queue if he has left the room
+      io.to(roomId).emit(
+        'update_queue',
+        await lrangeAsync(getQueueKey(roomId), 0, -1)
+      );
     }
 
     if (newHost) {
@@ -123,13 +135,20 @@ function onNewSocketConnection(socket) {
 
     await hsetAsync(
       getRoomKey(id),
-      'id', id,
-      'name', name,
-      'description', description,
-      'private', privateRoom,
-      'genres', genres.join(),
-      'numMembers', numMembers,
-      'json', JSON.stringify(room)
+      'id',
+      id,
+      'name',
+      name,
+      'description',
+      description,
+      'private',
+      privateRoom,
+      'genres',
+      genres.join(),
+      'numMembers',
+      numMembers,
+      'json',
+      JSON.stringify(room)
     );
 
     socket.join(id);

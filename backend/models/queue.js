@@ -142,6 +142,7 @@ async function getNextSong(roomId) {
 }
 
 export {
+  getQueueKey,
   deleteQueue,
   isInQueue,
   addToQueue,
