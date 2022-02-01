@@ -135,20 +135,13 @@ function onNewSocketConnection(socket) {
 
     await hsetAsync(
       getRoomKey(id),
-      'id',
-      id,
-      'name',
-      name,
-      'description',
-      description,
-      'private',
-      privateRoom,
-      'genres',
-      genres.join(),
-      'numMembers',
-      numMembers,
-      'json',
-      JSON.stringify(room)
+      'id', id,
+      'name', name,
+      'description', description,
+      'private', privateRoom,
+      'genres', genres.join(),
+      'numMembers', numMembers,
+      'json', JSON.stringify(room)
     );
 
     socket.join(id);
