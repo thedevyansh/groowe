@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   Text,
+  IconButton,
   HStack,
   useToast,
   useDisclosure,
@@ -64,8 +65,18 @@ export default function RoomInfo() {
             Welcome to {data.name}
           </Text>
           <HStack spacing={4}>
-            <FaUsers onClick={handleOpenQueueOrder} />
-            <FaRegCopy onClick={handleCopy} />
+            <IconButton
+              onClick={handleOpenQueueOrder}
+              variant='ghost'
+              size='sm'
+              icon={<FaUsers />}
+            />
+            <IconButton
+              onClick={handleCopy}
+              variant='ghost'
+              size='sm'
+              icon={<FaRegCopy />}
+            />
           </HStack>
         </Flex>
       </Box>
