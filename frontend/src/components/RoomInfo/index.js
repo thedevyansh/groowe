@@ -62,7 +62,7 @@ export default function RoomInfo() {
       <Box bg='rgba(12, 22, 45, 0.5)' px={4}>
         <Flex h={8} alignItems='center' justifyContent='space-between'>
           <Text size='sm' color='gray.400' isTruncated>
-            Welcome to {data.name}
+            Welcome to {data.name}, {username !== '' ? username : 'Guest'} 👋
           </Text>
           <HStack spacing={4}>
             <IconButton
