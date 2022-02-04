@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   Avatar,
   Text,
+  Badge,
   HStack,
   IconButton,
   Input,
@@ -46,6 +47,7 @@ function ChatBox() {
   } = useForm();
   const [messages, setMessages] = useState(initMessages);
   const [isOpen, setIsOpen] = useState(true);
+  const [unreadMessages, setUnreadMessages] = useState(0);
   const toast = useToast();
 
   useEffect(() => {
@@ -65,12 +67,16 @@ function ChatBox() {
           timeSent: timeSent,
         },
       ]);
+
+      if (!isOpen) {
+        setUnreadMessages(prevUnreadMessages => prevUnreadMessages + 1);
+      }
     });
 
     return () => {
       socket.removeAllListeners('chat_message');
     };
-  }, [socket, currentUser.username]);
+  }, [socket, currentUser.username, isOpen, setUnreadMessages]);
 
   const mySubmit = e => {
     e.preventDefault();
@@ -104,6 +110,10 @@ function ChatBox() {
 
   const onMinimizeChat = () => {
     setIsOpen(val => !val);
+
+    if (!isOpen && unreadMessages !== 0) {
+      setUnreadMessages(0);
+    }
   };
 
   return (
@@ -116,7 +126,16 @@ function ChatBox() {
         shadow='base'
         borderRadius='8px 0 0 0'>
         <HStack maxH='48px' justifyContent='space-between' px={4} py={2}>
-          <Text fontSize='lg'>Chat</Text>
+          <HStack spacing={2}>
+            <Text fontSize='lg'>Chat</Text>
+            {!isOpen && unreadMessages !== 0 ? (
+              <Badge variant='solid' colorScheme='red'>
+                {unreadMessages}
+              </Badge>
+            ) : (
+              ''
+            )}
+          </HStack>
           <IconButton
             onClick={onMinimizeChat}
             variant='ghost'

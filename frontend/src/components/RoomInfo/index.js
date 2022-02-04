@@ -6,6 +6,7 @@ import {
   Text,
   IconButton,
   HStack,
+  Tooltip,
   useToast,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -40,7 +41,7 @@ export default function RoomInfo() {
   const handleCopy = () => {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
       toast({
-        title: 'Room link copied to clipboard',
+        title: 'Invite link copied to clipboard',
         status: 'info',
         duration: '2000',
         position: 'top',
@@ -50,7 +51,7 @@ export default function RoomInfo() {
     }
 
     toast({
-      title: 'Error copying room link to clipboard',
+      title: 'Error copying invite link',
       status: 'error',
       duration: '2000',
       position: 'top',
@@ -62,21 +63,25 @@ export default function RoomInfo() {
       <Box bg='rgba(12, 22, 45, 0.5)' px={4}>
         <Flex h={8} alignItems='center' justifyContent='space-between'>
           <Text size='sm' color='gray.400' isTruncated>
-            Welcome to {data.name}, {username !== '' ? username : 'Guest'} 👋
+            Welcome to {data.name}, {username !== '' ? username : 'Guest'}.
           </Text>
           <HStack spacing={4}>
-            <IconButton
-              onClick={handleOpenQueueOrder}
-              variant='ghost'
-              size='sm'
-              icon={<FaUsers />}
-            />
-            <IconButton
-              onClick={handleCopy}
-              variant='ghost'
-              size='sm'
-              icon={<FaRegCopy />}
-            />
+            <Tooltip hasArrow label='Friends in queue' placeContent='bottom'>
+              <IconButton
+                onClick={handleOpenQueueOrder}
+                variant='ghost'
+                size='sm'
+                icon={<FaUsers />}
+              />
+            </Tooltip>
+            <Tooltip hasArrow label='Copy invite link' placeContent='bottom'>
+              <IconButton
+                onClick={handleCopy}
+                variant='ghost'
+                size='sm'
+                icon={<FaRegCopy />}
+              />
+            </Tooltip>
           </HStack>
         </Flex>
       </Box>

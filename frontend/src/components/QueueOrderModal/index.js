@@ -28,7 +28,7 @@ function QueueOrderModal({ isOpen, onClose, username, queue }) {
             <ModalHeader>Friends in queue</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Text mb={3} style={{ fontWeight: 'bold' }}>
+              <Text mb={3} fontWeight='bold'>
                 Next track by
               </Text>
               <HStack spacing={2} mb={4}>
@@ -39,7 +39,7 @@ function QueueOrderModal({ isOpen, onClose, username, queue }) {
               {queue.length > 1 && (
                 <>
                   <Divider />
-                  <Text mt={3} mb={3} style={{ fontWeight: 'bold' }}>
+                  <Text mt={3} mb={3} fontWeight='bold'>
                     Later
                   </Text>
                 </>

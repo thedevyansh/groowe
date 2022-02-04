@@ -77,7 +77,7 @@ function Vote() {
           />
         </VStack>
         <VStack>
-          <Text>{clientSaved ? '😍' : ''}</Text>
+          <Text>{clientSaved ? '⭐' : ''}</Text>
           <IconButton
             size='lg'
             disabled={clientSaved}
