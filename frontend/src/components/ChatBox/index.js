@@ -2,7 +2,6 @@ import React, {
   useState,
   useEffect,
   useContext,
-  useMemo,
   useCallback,
 } from 'react';
 import { SocketContext } from '../../contexts/socket';
@@ -17,6 +16,7 @@ import {
   InputGroup,
   InputRightElement,
   Flex,
+  SlideFade,
   useToast,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,7 @@ import { FiMaximize2 } from 'react-icons/fi';
 import styled from '@emotion/styled';
 import MessagesList from './subcomponents/MessageList';
 import Reactions from './subcomponents/Reactions';
-import throttle from '../../utils/throttle';
+import debounce from '../../utils/debounce';
 
 const BottomRight = styled(Flex)`
   flex-direction: column;
@@ -103,7 +103,7 @@ function ChatBox() {
 
     return () => {
       socket.removeAllListeners('chat_message');
-      socket.removeAllListeners('display');
+      socket.removeAllListeners('display_typing_status');
     };
   }, [
     socket,
@@ -113,34 +113,27 @@ function ChatBox() {
     setTypingStatus,
   ]);
 
-  const typingTimeout = useCallback(() => {
+  const typingTimeout = () => {
     socket.emit('typing', { username: currentUser.username, typing: false });
-  }, [socket, currentUser.username]);
+  };
 
-  const throttledShowUserTyping = useMemo(
-    () =>
-      throttle(e => {
-        if (e.key !== 'Enter') {
-          socket.emit('typing', {
-            username: currentUser.username,
-            typing: true,
-          });
+  const handleUserTyping = e => {
+    if (e.key !== 'Enter') {
+      console.log('[from throttle] it ran');
+      socket.emit('typing', {
+        username: currentUser.username,
+        typing: true,
+      });
 
-          clearTimeout(typingStatus.timeout);
-          setTypingStatus(prevTypingStatus => ({
-            ...prevTypingStatus,
-            timeout: setTimeout(typingTimeout, 1500),
-          }));
-        }
-      }, 50),
-    [
-      socket,
-      setTypingStatus,
-      typingTimeout,
-      currentUser.username,
-      typingStatus.timeout,
-    ]
-  );
+      clearTimeout(typingStatus.timeout);
+      setTypingStatus(prevTypingStatus => ({
+        ...prevTypingStatus,
+        timeout: setTimeout(typingTimeout, 1500),
+      }));
+    }
+  };
+
+  const debouncedHandleUserTyping = useCallback(debounce(handleUserTyping, 150), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mySubmit = e => {
     e.preventDefault();
@@ -222,11 +215,13 @@ function ChatBox() {
             <MessagesList messages={messages} />
             {currentUser.authenticated ? (
               <>
-                <Text fontSize='sm' fontWeight='bold' color='gray.300' ml={4}>
-                  {typingStatus.typing
-                    ? `${typingStatus.username} is typing...`
-                    : ''}
-                </Text>
+                <SlideFade in={typingStatus.typing}>
+                  <Text fontSize='sm' fontWeight='bold' color='gray.300' ml={4}>
+                    {typingStatus.typing
+                      ? `${typingStatus.username} is typing...`
+                      : ''}
+                  </Text>
+                </SlideFade>
                 <HStack p='1rem' pt='0.5rem'>
                   <Avatar
                     size='xs'
@@ -244,7 +239,7 @@ function ChatBox() {
                         {...register('message')}
                         variant='filled'
                         placeholder='Type your message'
-                        onKeyPress={throttledShowUserTyping}
+                        onKeyPress={debouncedHandleUserTyping}
                       />
                       <InputRightElement>
                         <IconButton
