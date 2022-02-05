@@ -119,7 +119,6 @@ function ChatBox() {
 
   const handleUserTyping = e => {
     if (e.key !== 'Enter') {
-      console.log('[from throttle] it ran');
       socket.emit('typing', {
         username: currentUser.username,
         typing: true,
