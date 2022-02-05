@@ -207,6 +207,11 @@ function SongDrawer({ handleOnClose }) {
                         defaultValue={playlist.name}
                         onChange={handleRenameChange}
                         onClick={e => e.stopPropagation()}
+                        onKeyDown={e =>
+                          e.key === 'Enter'
+                            ? onClickConfirmRenameButton(e, playlist.id)
+                            : null
+                        }
                       />
                     ) : (
                       <Text>{playlist.name}</Text>
