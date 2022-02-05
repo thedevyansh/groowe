@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import io from 'socket.io-client';
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = 'https://temporaldj.herokuapp.com';
 
 export const socket = io(SOCKET_URL, {
   withCredentials: true,
