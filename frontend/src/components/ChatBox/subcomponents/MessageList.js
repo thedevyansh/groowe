@@ -21,6 +21,7 @@ function MessagesList({ messages }) {
       w='100%'
       px='1rem'
       pt='1rem'
+      mb='0.5rem'
       overflowY='scroll'>
       {messages.map(message => (
         <Message key={message.id} data={message} />

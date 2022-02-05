@@ -65,8 +65,7 @@ function RoomBox(props) {
       toast({
         title: 'Error joining room',
         status: 'error',
-        isClosable: true,
-        duration: 9000,
+        duration: 4000,
       });
       history.push('/rooms');
     }
