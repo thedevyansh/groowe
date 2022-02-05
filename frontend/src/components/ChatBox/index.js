@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+} from 'react';
 import { SocketContext } from '../../contexts/socket';
 import { useSelector } from 'react-redux';
 import {
@@ -20,6 +26,7 @@ import { FiMaximize2 } from 'react-icons/fi';
 import styled from '@emotion/styled';
 import MessagesList from './subcomponents/MessageList';
 import Reactions from './subcomponents/Reactions';
+import throttle from '../../utils/throttle';
 
 const BottomRight = styled(Flex)`
   flex-direction: column;
@@ -48,6 +55,11 @@ function ChatBox() {
   const [messages, setMessages] = useState(initMessages);
   const [isOpen, setIsOpen] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
+  const [typingStatus, setTypingStatus] = useState({
+    username: '',
+    typing: false,
+    timeout: undefined,
+  });
   const toast = useToast();
 
   useEffect(() => {
@@ -73,10 +85,62 @@ function ChatBox() {
       }
     });
 
+    socket.on('display_typing_status', data => {
+      if (data.username !== currentUser.username && data.typing) {
+        setTypingStatus(prevTypingStatus => ({
+          ...prevTypingStatus,
+          typing: true,
+          username: data.username,
+        }));
+      } else {
+        setTypingStatus(prevTypingStatus => ({
+          ...prevTypingStatus,
+          typing: false,
+          username: '',
+        }));
+      }
+    });
+
     return () => {
       socket.removeAllListeners('chat_message');
+      socket.removeAllListeners('display');
     };
-  }, [socket, currentUser.username, isOpen, setUnreadMessages]);
+  }, [
+    socket,
+    currentUser.username,
+    isOpen,
+    setUnreadMessages,
+    setTypingStatus,
+  ]);
+
+  const typingTimeout = useCallback(() => {
+    socket.emit('typing', { username: currentUser.username, typing: false });
+  }, [socket, currentUser.username]);
+
+  const throttledShowUserTyping = useMemo(
+    () =>
+      throttle(e => {
+        if (e.key !== 'Enter') {
+          socket.emit('typing', {
+            username: currentUser.username,
+            typing: true,
+          });
+
+          clearTimeout(typingStatus.timeout);
+          setTypingStatus(prevTypingStatus => ({
+            ...prevTypingStatus,
+            timeout: setTimeout(typingTimeout, 1500),
+          }));
+        }
+      }, 50),
+    [
+      socket,
+      setTypingStatus,
+      typingTimeout,
+      currentUser.username,
+      typingStatus.timeout,
+    ]
+  );
 
   const mySubmit = e => {
     e.preventDefault();
@@ -87,6 +151,9 @@ function ChatBox() {
     const { message } = data;
     return new Promise(resolve => {
       if (message?.trim() !== '') {
+        clearTimeout(typingStatus.timeout);
+        typingTimeout();
+
         const timeSent = Date.now();
         socket.emit('chat_message', message, timeSent, response => {
           if (response?.success) {
@@ -154,33 +221,45 @@ function ChatBox() {
           <>
             <MessagesList messages={messages} />
             {currentUser.authenticated ? (
-              <HStack p='1rem'>
-                <Avatar size='xs' src={currentUser.profilePicture} alt='pfp' />
-                <form
-                  style={{ width: '100%' }}
-                  onSubmit={mySubmit}
-                  autoComplete='off'>
-                  <InputGroup>
-                    <Input
-                      id='message'
-                      type='text'
-                      {...register('message')}
-                      variant='filled'
-                      placeholder='Message room'
-                    />
-                    <InputRightElement>
-                      <IconButton
-                        isLoading={isSubmitting}
-                        type='submit'
-                        variant='ghost'
-                        colorScheme='blue'
-                        size='md'
-                        icon={<IoMdSend size='24px' />}
+              <>
+                <Text fontSize='sm' fontWeight='bold' color='gray.300' ml={4}>
+                  {typingStatus.typing
+                    ? `${typingStatus.username} is typing...`
+                    : ''}
+                </Text>
+                <HStack p='1rem' pt='0.5rem'>
+                  <Avatar
+                    size='xs'
+                    src={currentUser.profilePicture}
+                    alt='pfp'
+                  />
+                  <form
+                    style={{ width: '100%' }}
+                    onSubmit={mySubmit}
+                    autoComplete='off'>
+                    <InputGroup>
+                      <Input
+                        id='message'
+                        type='text'
+                        {...register('message')}
+                        variant='filled'
+                        placeholder='Type your message'
+                        onKeyPress={throttledShowUserTyping}
                       />
-                    </InputRightElement>
-                  </InputGroup>
-                </form>
-              </HStack>
+                      <InputRightElement>
+                        <IconButton
+                          isLoading={isSubmitting}
+                          type='submit'
+                          variant='ghost'
+                          colorScheme='blue'
+                          size='md'
+                          icon={<IoMdSend size='24px' />}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
+                  </form>
+                </HStack>
+              </>
             ) : null}
           </>
         ) : null}

@@ -46,6 +46,19 @@ function onNewSocketConnection(socket) {
     }
   });
 
+  socket.on('typing', async data => {
+    if (req.isAuthenticated()) {
+      const roomId = await getConnectedRoomId(socket.id);
+
+      if (!roomId) {
+        console.log('FAIL showing typing status', 'No room id');
+        return;
+      }
+
+      io.to(roomId).emit('display_typing_status', data);
+    }
+  });
+
   socket.on('reaction', async reaction => {
     if (req.isAuthenticated()) {
       const roomId = await getConnectedRoomId(socket.id);
