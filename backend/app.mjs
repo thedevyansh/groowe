@@ -60,7 +60,10 @@ app.use(
 app.use(logger('dev'));
 app.use(
   cors({
-    origin: 'https://temporaldj.netlify.app',
+    origin:
+      !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : ['https://temporaldj.netlify.app', 'https://temporaldj.tech'],
     credentials: true,
   })
 );

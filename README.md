@@ -1,25 +1,26 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3685488f-2c4e-49fb-a435-55f3e6aa7dae/deploy-status)](https://app.netlify.com/sites/temporaldj/deploys)
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
+![Number of stars](https://img.shields.io/github/stars/thedevyansh/temporaldj)
 ![GitHub last commit](https://img.shields.io/github/last-commit/thedevyansh/temporaldj)
-![Lines of code](https://img.shields.io/tokei/lines/github/thedevyansh/temporaldj)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thedevyansh/temporaldj)
 
 # Temporal.DJ
 
 !['Homepage'](snapshots/home.png)
 
-## Main Features
+## ⚡ Main Features
 
 * Listen to the same songs with your buddies simultaneously.
 * Interact through instant messaging, proximity audio, reactions and voting.
 * A fair queue mechanism which ensures everyone's song choices gets played.
 * Smooth user interface.
 
-## Tech Stack
+## 👨‍💻 Tech Stack
 
 - Frontend: React.js, Chakra UI, Redux, Socket.io Client, Axios
 - Backend: Node.js, Express.js, Redis (node-redis), Socket.io
 
-## How it works
+## ⚙️ How it works
 
 Temporal.DJ is based on the monolithic architecture. The client communicates with the `Express.js` server through HTTP requests and `Socket.io` events. The server communicate with the YouTube API to allow users to search Youtube for songs and the Redis database to handle storing & retrieving data and searching for rooms. The Redis Adapter relies on Redis Pub/Sub mechanism which ensures horizontal scaling by adding multiple instances of the server and database.
 
@@ -29,21 +30,25 @@ An overview of the application core constructs is given below:
 
 Users can create rooms where others can join. A room is a place where multiple people can listen to the same songs together, at the same time. Creation of a room emits a `Socket.io` event that generates new room details on the server/database which are send back to the client. Public rooms can then be searched and joined.
 
-Creating a room
+Join public rooms:
 
-!['Creating a room'](snapshots/createroom.png)
+!['Join public rooms'](snapshots/roomslist.png)
 
-Public rooms available
+Create a room:
 
-!['List of public rooms'](snapshots/roomslist.png)
+!['Create a room'](snapshots/createroom.png)
 
-Listening to songs in the room
+Listen to songs in the room:
 
-!['Listening to songs in the room'](snapshots/room.png)
+!['Listen to songs in the room'](snapshots/room.png)
 
 ### Queue Mechanism
 
 Users can join the queue in the room to have the songs in their selected playlist played. The order in which users join the queue determines the order on which songs are played. For each user in the queue, the first song in their selected playlist will be played. Then the first song will be cycled to the back of the playlist. This way, each user in the queue is guaranteed to have one of their songs played and playlists of any size will continue to keep playing until the user leaves the queue.
+
+Friends in queue:
+
+!['Friends in queue'](snapshots/queuelist.png)
 
 The queue mechanism is handled through `Socket.io` events. Events will be emitted when the song plays, or when there are no more users in the queue (as to stop the song).
 
@@ -57,7 +62,7 @@ A playlist is a collection of songs. Songs are played through playlists created 
 
 Users can like or dislike the current song. This is also handled through `Socket.io` events. If at least half of the people in the room have disliked the song, it will be skipped.
 
-## How the data is stored
+## 📦 How the data is stored
 
 - User
     - Prefix: `user:`
@@ -170,7 +175,7 @@ Users can like or dislike the current song. This is also handled through `Socket
     > #### To get message history of a room, starting with the newest and going backwards:
     > LRANGE message:\${messagesId} \${start} \${end}
 
-## How to run it locally?
+## 📥 How to run it locally?
 
 ### Prerequisites:
 - Node v14.17.6
@@ -184,8 +189,8 @@ I used the [redislab/rejson](https://hub.docker.com/r/redislabs/rejson/) and [re
 2. In the root directory of **backend**, create a `.env` file with the following contents:
 ```dosini
 REDIS_HOST=localhost    
-REDIS_PASSWORD=your_password_for_redis_here
-REDIS_PORT=default(6379)_or_custom_port
+REDIS_PASSWORD=your_password_for_redis
+REDIS_PORT=redis_port
 SALT_ROUNDS=10
 SESSION_SECRET=your_session_secret
 YOUTUBE_KEY=your_youtube_api_key

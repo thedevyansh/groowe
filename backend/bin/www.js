@@ -38,8 +38,10 @@ server.on('listening', onListening);
 
 socketio.attach(server, {
   cors: {
-    origin: 'https://temporaldj.netlify.app',
-
+    origin:
+      !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : ['https://temporaldj.netlify.app', 'https://temporaldj.tech'],
     methods: ['GET', 'POST'],
     credentials: true,
   },
