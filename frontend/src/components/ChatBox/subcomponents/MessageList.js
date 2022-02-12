@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import Message from './Message';
 import '../index.css';
 
-function MessagesList({ messages }) {
+function MessagesList({ messages, username }) {
   const messagesEnd = useRef({});
 
   const scrollToBottom = () => {
@@ -20,11 +20,10 @@ function MessagesList({ messages }) {
       h='100%'
       w='100%'
       px='1rem'
-      pt='1rem'
-      mb='0.5rem'
+      pt='0.5rem'
       overflowY='scroll'>
       {messages.map(message => (
-        <Message key={message.id} data={message} />
+        <Message key={message.id} data={message} username={username} />
       ))}
       <div style={{ float: 'left', clear: 'both' }} ref={messagesEnd}></div>
     </Box>

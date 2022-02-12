@@ -7,6 +7,7 @@ import React, {
 import { SocketContext } from '../../contexts/socket';
 import { useSelector } from 'react-redux';
 import {
+  Box,
   Avatar,
   Text,
   Badge,
@@ -127,12 +128,15 @@ function ChatBox() {
       clearTimeout(typingStatus.timeout);
       setTypingStatus(prevTypingStatus => ({
         ...prevTypingStatus,
-        timeout: setTimeout(typingTimeout, 1500),
+        timeout: setTimeout(typingTimeout, 3000),
       }));
     }
   };
 
-  const debouncedHandleUserTyping = useCallback(debounce(handleUserTyping, 150), []); // eslint-disable-line react-hooks/exhaustive-deps
+  const debouncedHandleUserTyping = useCallback(
+    debounce(handleUserTyping, 300),
+    []
+  ); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mySubmit = e => {
     e.preventDefault();
@@ -211,16 +215,22 @@ function ChatBox() {
 
         {isOpen ? (
           <>
-            <MessagesList messages={messages} />
+            <MessagesList messages={messages} username={currentUser.username} />
             {currentUser.authenticated ? (
               <>
-                <SlideFade in={typingStatus.typing}>
-                  <Text fontSize='sm' fontWeight='bold' color='gray.300' ml={4}>
-                    {typingStatus.typing
-                      ? `${typingStatus.username} is typing...`
-                      : ''}
-                  </Text>
-                </SlideFade>
+                <Box h='30px'>
+                  <SlideFade in={typingStatus.typing}>
+                    <Text
+                      fontSize='xs'
+                      fontWeight='bold'
+                      color='gray.300'
+                      ml={4}>
+                      {typingStatus.typing
+                        ? `${typingStatus.username} is typing...`
+                        : ''}
+                    </Text>
+                  </SlideFade>
+                </Box>
                 <HStack p='1rem' pt='0.5rem'>
                   <Avatar
                     size='xs'

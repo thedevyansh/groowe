@@ -90,9 +90,7 @@ function RoomBox(props) {
       toast({
         title: `${username} joined`,
         status: 'info',
-        variant: 'top-accent',
         position: 'top-right',
-        isClosable: true,
         duration: 3000,
       });
       setBubblesData(data =>
@@ -114,9 +112,7 @@ function RoomBox(props) {
       toast({
         title: `${username} left`,
         status: 'error',
-        variant: 'top-accent',
         position: 'top-right',
-        isClosable: true,
         duration: 3000,
       });
       setBubblesData(data =>
@@ -130,10 +126,8 @@ function RoomBox(props) {
       toast({
         title: `${username} is the host now!`,
         status: 'warning',
-        variant: 'top-accent',
         position: 'top-right',
-        isClosable: true,
-        duration: 3000,
+        duration: 5000,
       });
       // TODO: change bubblesData to reflect host?
     };
@@ -143,8 +137,7 @@ function RoomBox(props) {
         title: 'Room closed',
         description: 'The room you were in is now closed',
         status: 'error',
-        isClosable: true,
-        duration: 20000,
+        duration: 5000,
       });
       history.push('/rooms');
     };

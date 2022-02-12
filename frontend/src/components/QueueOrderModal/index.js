@@ -14,7 +14,7 @@ import {
 
 function QueueOrderModal({ isOpen, onClose, username, queue }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='md'>
+    <Modal isOpen={isOpen} onClose={onClose} size='xl'>
       <ModalOverlay />
       <ModalContent bg='gray.900'>
         {queue.length === 0 && (
@@ -59,6 +59,15 @@ function QueueOrderModal({ isOpen, onClose, username, queue }) {
                   return null;
                 })}
               </List>
+              <Text
+                mt={4}
+                mb={1}
+                fontSize='xs'
+                color='gray.500'
+                textAlign='center'>
+                The next songs, to be played by your friends in queue, are a
+                surprise :)
+              </Text>
             </ModalBody>
           </>
         )}
