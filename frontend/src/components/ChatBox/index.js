@@ -133,10 +133,7 @@ function ChatBox() {
     }
   };
 
-  const debouncedHandleUserTyping = useCallback(
-    debounce(handleUserTyping, 300),
-    []
-  ); // eslint-disable-line react-hooks/exhaustive-deps
+  const debouncedHandleUserTyping = useCallback(debounce(handleUserTyping, 300), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mySubmit = e => {
     e.preventDefault();
