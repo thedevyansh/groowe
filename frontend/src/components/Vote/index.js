@@ -1,6 +1,13 @@
 import React, { useContext, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Flex, IconButton, Text, HStack, VStack } from '@chakra-ui/react';
+import {
+  Flex,
+  IconButton,
+  Text,
+  HStack,
+  VStack,
+  useToast,
+} from '@chakra-ui/react';
 import { IoMdThumbsUp, IoMdThumbsDown } from 'react-icons/io';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styled from '@emotion/styled';
@@ -20,6 +27,7 @@ const BottomLeft = styled(Flex)`
 function Vote() {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch();
+  const toast = useToast();
   const authenticated = useSelector(state => state.user.authenticated);
   const currentSong = useSelector(state => state.queue.currentSong);
   const selectedPlaylistId = useSelector(
@@ -36,20 +44,35 @@ function Vote() {
   };
 
   const saveSong = async () => {
-    setSaveSongLoading(true);
-
-    const res = await saveToPlaylist(selectedPlaylistId, {
-      song: currentSong,
-    });
-
-    if (res.status === 200 && res.data.success) {
-      dispatch(
-        addSong({ playlistId: selectedPlaylistId, song: res.data.song })
-      );
-      setSaveSongLoading(false);
-      dispatch(clientSave());
+    if (selectedPlaylistId == null) {
+      toast({
+        title: 'No playlist selected',
+        description: 'Select a playlist to save this song.',
+        status: 'error',
+        position: 'top-right',
+        duration: 2000,
+      });
     } else {
-      // Handle save fail
+      setSaveSongLoading(true);
+      const res = await saveToPlaylist(selectedPlaylistId, {
+        song: currentSong,
+      });
+
+      if (res.status === 200 && res.data.success) {
+        dispatch(
+          addSong({ playlistId: selectedPlaylistId, song: res.data.song })
+        );
+        dispatch(clientSave());
+      } else {
+        toast({
+          title: 'Error saving song',
+          description: "Song couldn't be saved. Please try again.",
+          status: 'error',
+          position: 'top-right',
+          duration: 2000,
+        });
+      }
+      setSaveSongLoading(false);
     }
   };
 
