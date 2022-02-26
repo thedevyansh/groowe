@@ -76,7 +76,7 @@ function CreateRoomModal({ isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='3xl'>
+    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size='3xl' isCentered>
       <ModalOverlay />
       <ModalContent bg='gray.900'>
         <form onSubmit={handleSubmit(handleCreateRoom)}>
