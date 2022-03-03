@@ -44,36 +44,26 @@ function Vote() {
   };
 
   const saveSong = async () => {
-    if (selectedPlaylistId == null) {
+    setSaveSongLoading(true);
+    const res = await saveToPlaylist(selectedPlaylistId, {
+      song: currentSong,
+    });
+
+    if (res.status === 200 && res.data.success) {
+      dispatch(
+        addSong({ playlistId: selectedPlaylistId, song: res.data.song })
+      );
+      dispatch(clientSave());
+    } else {
       toast({
-        title: 'No playlist selected',
-        description: 'Select a playlist to save this song.',
+        title: 'Error saving song',
+        description: "Song couldn't be saved. Please try again.",
         status: 'error',
         position: 'top-right',
         duration: 2000,
       });
-    } else {
-      setSaveSongLoading(true);
-      const res = await saveToPlaylist(selectedPlaylistId, {
-        song: currentSong,
-      });
-
-      if (res.status === 200 && res.data.success) {
-        dispatch(
-          addSong({ playlistId: selectedPlaylistId, song: res.data.song })
-        );
-        dispatch(clientSave());
-      } else {
-        toast({
-          title: 'Error saving song',
-          description: "Song couldn't be saved. Please try again.",
-          status: 'error',
-          position: 'top-right',
-          duration: 2000,
-        });
-      }
-      setSaveSongLoading(false);
     }
+    setSaveSongLoading(false);
   };
 
   const dislike = () => {
@@ -103,10 +93,9 @@ function Vote() {
           <Text>{clientSaved ? '⭐' : ''}</Text>
           <IconButton
             size='lg'
-            disabled={clientSaved}
+            disabled={selectedPlaylistId == null || clientSaved}
             isLoading={saveSongLoading}
             onClick={saveSong}
-            colorScheme={clientSaved ? 'yellow' : 'gray'}
             aria-label='Save this song'
             icon={clientSaved ? <AiFillStar /> : <AiOutlineStar />}
           />
