@@ -7,6 +7,7 @@ import {
   HStack,
   VStack,
   useToast,
+  SlideFade,
 } from '@chakra-ui/react';
 import { IoMdThumbsUp, IoMdThumbsDown } from 'react-icons/io';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -90,7 +91,9 @@ function Vote() {
           />
         </VStack>
         <VStack>
-          <Text>{clientSaved ? '⭐' : ''}</Text>
+          <SlideFade in={clientSaved}>
+            <Text>{clientSaved ? '★' : ''}</Text>
+          </SlideFade>
           <IconButton
             size='lg'
             disabled={selectedPlaylistId == null || clientSaved}

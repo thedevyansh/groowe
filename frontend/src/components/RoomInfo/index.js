@@ -14,6 +14,7 @@ import { FaRegCopy, FaUsers } from 'react-icons/fa';
 import { SocketContext } from '../../contexts/socket';
 import { updateQueue } from '../../slices/queueSlice';
 import QueueOrderModal from '../QueueOrderModal';
+import Clock from 'react-live-clock';
 
 export default function RoomInfo() {
   const { data } = useSelector(state => state.currentRoom);
@@ -82,6 +83,7 @@ export default function RoomInfo() {
                 icon={<FaRegCopy />}
               />
             </Tooltip>
+            <Clock format={'h:mm a'} ticking={true} />
           </HStack>
         </Flex>
       </Box>
