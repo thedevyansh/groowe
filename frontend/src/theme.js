@@ -5,7 +5,7 @@ export const config = {
   useSystemColorMode: false,
   fonts: {
     heading: `Poppins, ${base.fonts?.heading}`,
-    body: `Rubik, ${base.fonts?.body}`,
+    body: `Inter, ${base.fonts?.body}`,
   },
   styles: {
     global: props => ({
