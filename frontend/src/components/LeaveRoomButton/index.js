@@ -1,36 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { TiArrowBack } from 'react-icons/ti';
+
+const btnStyle = {
+  backgroundColor: '#FEB2B2',
+  color: '#000',
+};
 
 function LeaveRoomButton() {
   const history = useHistory();
+  const [isLeaveBtnClicked, setIsLeaveBtnClicked] = useState(false);
 
   const handleLeaveRoom = () => {
-    history.push('/rooms');
+    if (isLeaveBtnClicked) {
+      history.push('/rooms');
+    } else {
+      setIsLeaveBtnClicked(true);
+    }
   };
 
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        zIndex='1'
-        top={4}
-        left={4}
-        leftIcon={<TiArrowBack />}
-        variant='solid'
-        bgColor='var(--chakra-colors-whiteAlpha-300)'
-        _hover={{
-          backgroundColor: 'var(--chakra-colors-whiteAlpha-400)',
-        }}>
-        Leave room
-      </MenuButton>
-      <MenuList bgColor='#FEB2B2' color='black'>
-        <MenuItem fontWeight='bold' onClick={handleLeaveRoom}>
-          Confirm Leave
-        </MenuItem>
-      </MenuList>
-    </Menu>
+    <Button
+      zIndex='1'
+      top={4}
+      left={4}
+      leftIcon={isLeaveBtnClicked ? <TiArrowBack /> : ''}
+      variant='solid'
+      style={
+        isLeaveBtnClicked
+          ? btnStyle
+          : { backgroundColor: 'var(--chakra-colors-whiteAlpha-300)' }
+      }
+      onClick={handleLeaveRoom}>
+      {!isLeaveBtnClicked ? 'Leave room' : 'Confirm leave'}
+    </Button>
   );
 }
 
