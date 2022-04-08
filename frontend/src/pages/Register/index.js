@@ -96,7 +96,7 @@ function Register() {
       <Helmet>
         <title>Register - Temporal.DJ</title>
       </Helmet>
-      <Box maxW='md' mx='auto' py='3%'>
+      <Box maxW='md' mx='auto' py='2%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
           Let's get you set up
         </Heading>

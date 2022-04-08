@@ -63,7 +63,7 @@ function Login() {
       <Helmet>
         <title>Login - Temporal.DJ</title>
       </Helmet>
-      <Box maxW='md' mx='auto' py='3%'>
+      <Box maxW='md' mx='auto' py='2%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
           Login to resume fun
         </Heading>
