@@ -21,7 +21,8 @@ import {
 import { Helmet } from 'react-helmet-async';
 import { Link as ReactLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import {HorizontalHeading} from '../../horizontalHeading'
+import { HorizontalHeading } from '../../horizontalHeading';
+import LoginWithGoogle from '../../components/LoginWithGoogle';
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -95,7 +96,7 @@ function Register() {
       <Helmet>
         <title>Register - Temporal.DJ</title>
       </Helmet>
-      <Box maxW='md' mx='auto' py='5%'>
+      <Box maxW='md' mx='auto' py='3%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
           Let's get you set up
         </Heading>
@@ -173,14 +174,15 @@ function Register() {
                 fontSize='md'>
                 Register
               </Button>
-              <Text mt='4' mb='8' align='center' maxW='md' fontWeight='medium'>
-                <Text as='span'>Already have an account? </Text>
-                <Link color='blue.200' as={ReactLink} to='/login'>
-                  Login here.
-                </Link>
-              </Text>
             </Stack>
           </form>
+          <LoginWithGoogle />
+          <Text mt='4' mb='8' align='center' maxW='md' fontWeight='medium'>
+            <Text as='span'>Already have an account? </Text>
+            <Link color='blue.200' as={ReactLink} to='/login'>
+              Login here.
+            </Link>
+          </Text>
         </Box>
       </Box>
       <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
