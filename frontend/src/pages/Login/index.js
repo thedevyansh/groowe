@@ -22,6 +22,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link as ReactLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { HorizontalHeading } from '../../horizontalHeading';
+import LoginWithGoogle from '../../components/LoginWithGoogle';
 
 const validateUsername = value => {
   return value ? true : 'Enter your username';
@@ -62,7 +63,7 @@ function Login() {
       <Helmet>
         <title>Login - Temporal.DJ</title>
       </Helmet>
-      <Box maxW='md' mx='auto' py='5%'>
+      <Box maxW='md' mx='auto' py='2%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
           Login to resume fun
         </Heading>
@@ -112,14 +113,15 @@ function Login() {
                 fontSize='md'>
                 Login
               </Button>
-              <Text mt='4' mb='8' align='center' maxW='md' fontWeight='medium'>
-                <Text as='span'>Don&apos;t have an account? </Text>
-                <Link color='blue.200' as={ReactLink} to='/register'>
-                  Register here.
-                </Link>
-              </Text>
             </Stack>
           </form>
+          <LoginWithGoogle />
+          <Text mt='4' align='center' maxW='md' fontWeight='medium'>
+            <Text as='span'>Don&apos;t have an account? </Text>
+            <Link color='blue.200' as={ReactLink} to='/register'>
+              Register here.
+            </Link>
+          </Text>
         </Box>
       </Box>
       <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
