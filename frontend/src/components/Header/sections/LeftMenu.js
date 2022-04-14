@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Flex, Image } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import logo from './temporalDjLogo.png';
 

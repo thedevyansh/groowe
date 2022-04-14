@@ -14,6 +14,7 @@ import {
 import { SocketContext, socket } from './contexts/socket';
 
 import Home from './pages/Home';
+import SpotifyRecommender from './pages/SpotifyRecommender';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Rooms from './pages/Rooms';
@@ -51,6 +52,11 @@ function App() {
                 path='/'
                 exact
                 component={withAuthorization(Home, PUBLIC_PAGE)}
+              />
+              <Route
+                path='/spotify-recommender'
+                exact
+                component={withAuthorization(SpotifyRecommender, LOGGED_IN_ONLY)}
               />
               <Route
                 path='/register'

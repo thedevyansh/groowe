@@ -15,6 +15,7 @@ import { playlistRouter } from './routes/playlist.js';
 
 import redisClient from './redis_client.js';
 import './passport_setup.js';
+import './passport_setup_google.js'
 import io from './socketio_server.js';
 
 import socketsRoom from './sockets/room.js';

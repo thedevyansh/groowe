@@ -14,6 +14,11 @@ const existsAsync = promisify(redisClient.exists).bind(redisClient);
 
 const getUserKey = username => usersPrefix + username;
 
+const redirect_uri =
+  !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://temporaldj.netlify.app';
+
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     const user = req.user;
@@ -108,5 +113,17 @@ router.put('/update', async (req, res) => {
 
   res.status(200).send();
 });
+
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: `${redirect_uri}/login`,
+  }),
+  (req, res) => {
+    res.redirect(redirect_uri);
+  }
+);
 
 export { router as authRouter, getUserKey };

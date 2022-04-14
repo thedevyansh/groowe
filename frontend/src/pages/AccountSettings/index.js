@@ -155,9 +155,9 @@ function AccountSettings() {
           </Button>
         </Box>
       </chakra.form>
-      <HorizontalHeading>GROOWE</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
     </Container>
   );
 }
-
+  
 export default AccountSettings;

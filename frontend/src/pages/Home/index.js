@@ -65,7 +65,7 @@ export default function Home({ history, user }) {
           </Button>
         </ButtonGroup>
       </Container>
-      <HorizontalHeading>GROOWE</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
       <CreateRoomModal isOpen={isOpen} onClose={onClose} />
     </>
   );

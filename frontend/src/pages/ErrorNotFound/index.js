@@ -13,7 +13,7 @@ function index() {
       <Text textAlign='center'>
         Oops, the page you're trying to reach doesn't exist :(
       </Text>
-      <HorizontalHeading>GROOWE</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
     </Flex>
   );
 }

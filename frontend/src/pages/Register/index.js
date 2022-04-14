@@ -185,7 +185,7 @@ function Register() {
           </Text>
         </Box>
       </Box>
-      <HorizontalHeading>GROOWE</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
     </>
   );
 }

@@ -124,7 +124,7 @@ function Login() {
           </Text>
         </Box>
       </Box>
-      <HorizontalHeading>GROOWE</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
     </>
   );
 }

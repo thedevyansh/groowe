@@ -160,7 +160,7 @@ function SongDrawer({ handleOnClose }) {
           Playlist Manager
         </DrawerHeader>
         <DrawerBody bgColor='black'>
-          <SimpleGrid my={2} columns={2} templateColumns='1fr 3fr' spacing={8}>
+          <SimpleGrid my={2} columns={3} templateColumns='1fr 4fr 2fr' spacing={8}>
             <Box minW='260px'>
               <HStack
                 h='var(--chakra-sizes-10)'
@@ -254,6 +254,9 @@ function SongDrawer({ handleOnClose }) {
             <Box w='full'>
               <SongSearch />
               <SongList />
+            </Box>
+            <Box>
+              <h1>Save Spotify recommended songs</h1>
             </Box>
           </SimpleGrid>
         </DrawerBody>
