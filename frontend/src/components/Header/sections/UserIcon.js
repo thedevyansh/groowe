@@ -1,16 +1,23 @@
 import React from 'react';
 import { Avatar, MenuButton, HStack, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import {FaSignInAlt, FaUserAlt} from 'react-icons/fa'
+import { FaSignInAlt, FaUserAlt, IoIosMusicalNote } from 'react-icons/all';
 
 const UserIcon = ({ isLoaded, isAuth, image }) => {
   if (!isLoaded) {
     return null;
   } else if (isAuth) {
     return (
-      <MenuButton display='flex' alignItems='center'>
-        <Avatar size='sm' bg='gray.800' src={image} />
-      </MenuButton>
+      <>
+        <MenuButton display='flex' alignItems='center'>
+          <Avatar size='sm' bg='gray.800' src={image} />
+        </MenuButton>
+        <Link to='/spotify-recommender'>
+          <Button variant='ghost' ml={2}>
+            <IoIosMusicalNote size={25} />
+          </Button>
+        </Link>
+      </>
     );
   } else {
     return (
