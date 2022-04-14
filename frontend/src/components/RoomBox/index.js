@@ -272,7 +272,7 @@ function RoomBox(props) {
       h='calc(100vh - 80px)'
       w='100%'>
       <Helmet>
-        <title>{`${currentRoom?.data?.name} - Temporal.DJ`}</title>
+        <title>{`${currentRoom?.data?.name} - GrooWe`}</title>
       </Helmet>
       <LeaveRoomButton />
       <YoutubePlayer isAuth={authenticated} height='400' width='680' />

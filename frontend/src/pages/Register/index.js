@@ -94,7 +94,7 @@ function Register() {
   return (
     <>
       <Helmet>
-        <title>Register - Temporal.DJ</title>
+        <title>Register - GrooWe</title>
       </Helmet>
       <Box maxW='md' mx='auto' py='2%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
@@ -185,7 +185,7 @@ function Register() {
           </Text>
         </Box>
       </Box>
-      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
     </>
   );
 }

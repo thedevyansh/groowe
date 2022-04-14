@@ -36,7 +36,7 @@ function Room({ history }) {
   return (
     <>
       <Helmet>
-        <title>Public Rooms - Temporal.DJ</title>
+        <title>Public Rooms - GrooWe</title>
       </Helmet>
       <Container maxW='container.xl' p={8} overflow='auto'>
         <Flex spacing={8} justifyContent='space-between' mb={10}>

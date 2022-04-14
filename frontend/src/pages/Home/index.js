@@ -34,7 +34,7 @@ export default function Home({ history, user }) {
   return (
     <>
       <Helmet>
-        <title>Temporal.DJ</title>
+        <title>GrooWe</title>
       </Helmet>
       <Container
         h='calc(100vh - 72px)'
@@ -65,7 +65,7 @@ export default function Home({ history, user }) {
           </Button>
         </ButtonGroup>
       </Container>
-      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
+      <HorizontalHeading>GrooWeGrooWe</HorizontalHeading>
       <CreateRoomModal isOpen={isOpen} onClose={onClose} />
     </>
   );
