@@ -88,7 +88,7 @@ function AccountSettings() {
       }}
       p={10}>
       <Helmet>
-        <title>My Account - Temporal.DJ</title>
+        <title>My Account - GrooWe</title>
       </Helmet>
       <chakra.form
         autoComplete='off'
@@ -155,7 +155,7 @@ function AccountSettings() {
           </Button>
         </Box>
       </chakra.form>
-      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
+      <HorizontalHeading>GROOWE</HorizontalHeading>
     </Container>
   );
 }

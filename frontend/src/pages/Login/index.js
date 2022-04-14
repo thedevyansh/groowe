@@ -61,7 +61,7 @@ function Login() {
   return (
     <>
       <Helmet>
-        <title>Login - Temporal.DJ</title>
+        <title>Login - GrooWe</title>
       </Helmet>
       <Box maxW='md' mx='auto' py='2%'>
         <Heading textAlign='center' size='lg' padding='1rem'>
@@ -124,7 +124,7 @@ function Login() {
           </Text>
         </Box>
       </Box>
-      <HorizontalHeading>TEMPORAL.DJ</HorizontalHeading>
+      <HorizontalHeading>GROOWE</HorizontalHeading>
     </>
   );
 }

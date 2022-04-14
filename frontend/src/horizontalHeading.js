@@ -11,7 +11,7 @@ export const HorizontalHeading = styled.div`
   overflow: hidden;
   opacity: 0.1;
   position: fixed;
-  left: -20px;
+  left: 0px;
   bottom: -40px;
   padding: 0;
   margin: 0;
