@@ -41,7 +41,7 @@ socketio.attach(server, {
     origin:
       !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : ['https://temporaldj.netlify.app', 'https://temporaldj.tech'],
+        : ['https://temporaldj.netlify.app', 'https://temporaldj.tech', 'https://groowe.netlify.app'],
     methods: ['GET', 'POST'],
     credentials: true,
   },
