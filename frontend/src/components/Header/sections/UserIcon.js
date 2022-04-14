@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, MenuButton, HStack, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { FaSignInAlt, FaUserAlt, IoIosMusicalNote } from 'react-icons/all';
+import { FaSignInAlt, FaUserAlt } from 'react-icons/all';
 
 const UserIcon = ({ isLoaded, isAuth, image }) => {
   if (!isLoaded) {
@@ -12,11 +12,11 @@ const UserIcon = ({ isLoaded, isAuth, image }) => {
         <MenuButton display='flex' alignItems='center'>
           <Avatar size='sm' bg='gray.800' src={image} />
         </MenuButton>
-        <Link to='/spotify-recommender'>
+        {/* <Link to='/spotify-recommender'>
           <Button variant='ghost' ml={2}>
             <IoIosMusicalNote size={25} />
           </Button>
-        </Link>
+        </Link> */}
       </>
     );
   } else {

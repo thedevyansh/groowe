@@ -12,7 +12,6 @@ import {
   Tr,
   Th,
   Tbody,
-  Td,
 } from '@chakra-ui/react';
 import $ from 'jquery';
 
@@ -172,9 +171,9 @@ function SpotifyRecommender() {
         <Box className='results' id='track-table'>
           <Center>
             <Box fontSize='4xl' fontWeight='bold'>
-              <a id='playlist-name'>
+              <Text id='playlist-name'>
                 Top <span className='keywords'> </span> Tracks{' '}
-              </a>
+              </Text>
             </Box>
           </Center>
           <Box className='button-row'>
