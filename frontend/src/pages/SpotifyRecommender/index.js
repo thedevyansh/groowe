@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   Box,
   Button,
   Text,
   Center,
+  FormControl,
+  FormLabel,
   Input,
   TableContainer,
   Table,
@@ -12,22 +14,171 @@ import {
   Tr,
   Th,
   Tbody,
+  Td,
 } from '@chakra-ui/react';
 import $ from 'jquery';
+import _, { map } from 'underscore';
 
 function SpotifyRecommender() {
-  useEffect(() => {
+  let maxPlaylists = 10;
+  let maxPlaylistsToDisplay = 10;
+  let credentials = null;
+
+  let totalTracks = 0;
+  let totalPlaylistCount = 0;
+
+  let abortFetching = false;
+  let popNormalize = false;
+
+  let allPlaylists = [];
+  let topTracks = null;
+  let allTracks = {};
+
+  function error(s) {
+    info(s);
+  }
+
+  function info(s) {
+    $('#info').text(s);
+  }
+
+  function getTime() {
+    return Math.round(new Date().getTime() / 1000);
+  }
+
+  function callSpotify(url, data) {
+    return $.ajax(url, {
+      dataType: 'json',
+      data: data,
+      headers: {
+        Authorization: 'Bearer ' + credentials.token,
+      },
+    });
+  }
+
+  function findMatchingPlaylists(text) {
+    let outstanding = 0;
+
+    function addItem(tbody, which, item) {
+      let tr = $('<Tr>');
+      let rowNumber = $('<Td>').text(which);
+      let title = $('<Td>').text(item.name);
+      let tracks = $('<Td>').text(item.tracks.total);
+
+      tr.append(rowNumber);
+      tr.append(title);
+      tr.append(tracks);
+      $('#playlist-item').append(tr);
+      tbody.append(tr);
+    }
+
+    function showSearchResults(data) {
+      outstanding--;
+
+      var matching =
+        data.playlists.total > maxPlaylists
+          ? '>' + maxPlaylists
+          : data.playlists.total;
+      $('#matching').text(matching);
+      var tbody = $('#playlist-items');
+      _.each(data.playlists.items, function (item, which) {
+        if (true || !item.collaborative) {
+          if (allPlaylists.length < maxPlaylistsToDisplay) {
+            addItem(tbody, data.playlists.offset + which + 1, item);
+          }
+          if (allPlaylists.length < maxPlaylists) {
+            allPlaylists.push([item.owner.id, item.id]);
+            totalTracks += item.tracks.total;
+          }
+        } else {
+        }
+      });
+
+      let totalPlaylists = allPlaylists.length;
+      let total = Math.min(data.playlists.total, maxPlaylists);
+      // let percentComplete = Math.round((totalPlaylists * 100) / total);
+
+      $('.total-tracks').text(totalTracks);
+      $('.total-playlists').text(totalPlaylists);
+      // $('#playlist-progress').css('width', percentComplete + '%');
+
+      if (abortFetching || outstanding == 0) {
+        abortFetching = false;
+        if (totalPlaylists > 0) {
+          $('#fetch-tracks-ready').show(200);
+        } else {
+          info('No matching playlists found');
+          $('#fetch-tracks-ready').show(200);
+        }
+      }
+    }
+
+    function processPlaylistError() {
+      outstanding--;
+      error("Can't get playlists");
+    }
+
+    function processPlaylists(data) {
+      let total = Math.min(data.playlists.total, maxPlaylists);
+      let offset = data.playlists.offset + data.playlists.items.length;
+      for (let i = offset; i < total; i += 50) {
+        let url = 'https://api.spotify.com/v1/search';
+        let params = {
+          q: text,
+          type: 'playlist',
+          limit: data.playlists.limit,
+          offset: i,
+        };
+        outstanding++;
+        callSpotify(url, params).then(showSearchResults, processPlaylistError);
+      }
+      showSearchResults(data);
+    }
+
+    totalTracks = 0;
+    abortFetching = false;
+    allPlaylists = [];
+    $('#fetch-tracks-ready').hide();
+
+    let url = 'https://api.spotify.com/v1/search';
+    let params = {
+      q: text,
+      type: 'playlist',
+      limit: 50,
+    };
+    let offset = 0;
+    $('#playlist-items').empty();
+    outstanding++;
+    callSpotify(url, params).then(processPlaylists, processPlaylistError);
+  }
+
+  function go() {
+    $('#top').hide(200);
+    let text = $('#playlist-terms').val();
+    if (text.length > 0) {
+      info('');
+      $('.keywords').text(text);
+      $('.results').hide();
+      $('#playlist-table').show();
+      findMatchingPlaylists(text);
+    } else {
+      info('Enter some keywords first.');
+    }
+  }
+
+  function initApp() {
     $('.intro-form').hide();
     $('.results').hide();
-    // $('#playlist-terms').keyup(function (event) {
-    //   if (event.keyCode == 13) {
-    //     go();
-    //   }
-    // });
 
-    // $('#go').on('click', function () {
-    //   go();
-    // });
+    $('#playlist-terms').keyup(function (event) {
+      if (event.keyCode == 13) {
+        go();
+      }
+    });
+
+    $('#go').on('click', function () {
+      go();
+    });
 
     // $('.stop-button').on('click', function () {
     //   abortFetching = true;
@@ -37,9 +188,10 @@ function SpotifyRecommender() {
     //   fetchAllTracksFromPlaylist();
     // });
 
-    // $('#login-button').on('click', function () {
-    //   loginWithSpotify();
-    // });
+    $('#login-button').on('click', function () {
+      loginWithSpotify();
+    });
+
     // $('#save-button').on('click', function () {
     //   savePlaylist();
     // });
@@ -48,7 +200,86 @@ function SpotifyRecommender() {
     //   popNormalize = $('#norm-for-pop').is(':checked');
     //   refreshTrackList(allTracks);
     // });
+  }
+
+  function loginWithSpotify() {
+    let client_id = '516f835b0b6e4aef8881a568bfd47fdc';
+    let redirect_uri = 'https://groowe.netlify.app/spotify-recommender/';
+    let scopes = 'playlist-modify-public';
+
+    if (document.location.hostname == 'localhost') {
+      redirect_uri = 'http://localhost:3000/spotify-recommender/';
+    }
+
+    let url =
+      'https://accounts.spotify.com/authorize?client_id=' +
+      client_id +
+      '&response_type=token' +
+      '&scope=' +
+      encodeURIComponent(scopes) +
+      '&redirect_uri=' +
+      encodeURIComponent(redirect_uri);
+    document.location = url;
+  }
+
+  const performAuthDance = useCallback(() => {
+    // if we already have a token and it hasn't expired, use it,
+    if ('credentials' in localStorage) {
+      credentials = JSON.parse(localStorage.credentials);
+    }
+
+    if (credentials && credentials.expires > getTime()) {
+      $('#search-form').show();
+    } else {
+      // we have a token as a hash parameter in the url
+      // so parse hash
+      let hash = window.location.hash.replace(/#/g, '');
+      let all = hash.split('&');
+      let args = {};
+
+      all.forEach(function (keyvalue) {
+        let idx = keyvalue.indexOf('=');
+        let key = keyvalue.substring(0, idx);
+        let val = keyvalue.substring(idx + 1);
+        args[key] = val;
+      });
+
+      if (typeof args['access_token'] != 'undefined') {
+        let g_access_token = args['access_token'];
+        let expiresAt = getTime() + 3600;
+
+        if (typeof args['expires_in'] != 'undefined') {
+          let expires = parseInt(args['expires_in']);
+          expiresAt = expires + getTime();
+        }
+
+        credentials = {
+          token: g_access_token,
+          expires: expiresAt,
+        };
+
+        callSpotify('https://api.spotify.com/v1/me').then(
+          function (user) {
+            credentials.user_id = user.id;
+            localStorage['credentials'] = JSON.stringify(credentials);
+            window.location.hash = '';
+            $('#search-form').show();
+          },
+          function () {
+            error("Can't get user info");
+          }
+        );
+      } else {
+        // otherwise, got to spotify to get auth
+        $('#login-form').show();
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    initApp();
+    performAuthDance();
+  }, [initApp, performAuthDance]);
 
   return (
     <>
@@ -90,12 +321,16 @@ function SpotifyRecommender() {
 
           <Box id='search-form' className='intro-form row' mt='40px'>
             <Box>
-              <Input
-                id='playlist-terms'
-                variant='filled'
-                placeholder="'work out' OR workout "
-                _placeholder={{ color: 'white' }}
-              />
+              <FormControl isRequired>
+                <FormLabel htmlFor='playlist-terms'>
+                  Search playlists by genre
+                </FormLabel>
+                <Input
+                  id='playlist-terms'
+                  variant='filled'
+                  placeholder="'work out' OR workout "
+                />
+              </FormControl>
               <Center>
                 <Button
                   id='go'
@@ -111,23 +346,24 @@ function SpotifyRecommender() {
         </Box>
       </Box>
 
-      <Box className='container-fluid work' p='40px'>
-        <Box id='info' className='h1 text-center'></Box>
+      <Box className='container-fluid work' p='30px'>
+        <Center>
+          <Box id='info' fontSize='2xl' m={4}></Box>
+        </Center>
 
         <Box className='results' id='playlist-table'>
           <Center>
-            <Box id='attitle' fontSize='4xl' fontWeight='bold' m={4}>
+            <Box id='attitle' fontSize='4xl' fontWeight='bold'>
               Matching Playlists for <span className='keywords'></span>
             </Box>
           </Center>
-          ------------ Progress bar here ------------
-          <Box className='button-row'>
+          {/* ------------ Progress bar here ------------ */}
+          <Box className='button-row' fontSize='18px'>
             <Center>
               <Text>
-                We've found
-                <span className='total-playlists'> </span> matching playlists
-                with a total of <span className='total-tracks'> 0 </span>{' '}
-                tracks.
+                Here are the <span className='total-playlists'> </span> matching
+                playlists with a total of{' '}
+                <span className='total-tracks'> 0 </span> tracks.
               </Text>
             </Center>
             <Box id='fetch-tracks-ready'>
@@ -152,10 +388,7 @@ function SpotifyRecommender() {
             </Box>
           </Box>
           <TableContainer>
-            <Table
-              variant='simple'
-              colorScheme='linkedin'
-              className='table table-striped table-bordered'>
+            <Table variant='simple' colorScheme='linkedin'>
               <Thead>
                 <Tr>
                   <Th>#</Th>
@@ -221,12 +454,9 @@ function SpotifyRecommender() {
               </Center>
             </Box>
           </Box>
-          ------------ Progress bar here ------------
+          {/* ------------ Progress bar here ------------ */}
           <TableContainer>
-            <Table
-              variant='simple'
-              colorScheme='linkedin'
-              className='table table-striped table-bordered'>
+            <Table variant='simple' colorScheme='linkedin'>
               <Thead>
                 <Tr>
                   <Th>#</Th>
