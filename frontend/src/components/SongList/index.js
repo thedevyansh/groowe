@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Center, Spinner } from '@chakra-ui/react';
+import { Box, Center } from '@chakra-ui/react';
+import { Grid } from 'react-loader-spinner';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Song from '../SongCard';
 import * as playlistApi from '../../services/playlist';
@@ -79,14 +80,8 @@ function SongList() {
 
   if (status === 'loading') {
     return (
-      <Center height='475px'>
-        <Spinner
-          thickness='4px'
-          speed='0.55s'
-          emptyColor='gray.200'
-          color='blue.300'
-          size='xl'
-        />
+      <Center h='475px'>
+        <Grid color='#90CCF4' height={40} width={40} />
       </Center>
     );
   }

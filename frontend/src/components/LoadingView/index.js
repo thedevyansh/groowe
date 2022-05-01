@@ -1,16 +1,11 @@
 import React from 'react';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
+import { Grid } from 'react-loader-spinner';
 
 function LoadingView() {
   return (
     <Center h='65vh'>
-      <Spinner
-        thickness='4px'
-        speed='0.55s'
-        emptyColor='gray.200'
-        color='blue.300'
-        size='xl'
-      />
+      <Grid color='#90CCF4' height={40} width={40} />
     </Center>
   );
 }
