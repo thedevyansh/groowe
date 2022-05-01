@@ -20,7 +20,7 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>GrooWe</title>
+        <title>About - GrooWe</title>
       </Helmet>
       <Container
         mt='20px'
