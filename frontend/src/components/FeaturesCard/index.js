@@ -8,7 +8,7 @@ function FeaturesCard({ imageUrl, imageAlt, feature }) {
         <Image
           src={imageUrl}
           alt={imageAlt}
-          height='80px'
+          height='110px'
         />
       </Center>
 

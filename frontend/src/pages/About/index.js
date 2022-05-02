@@ -11,10 +11,10 @@ import {
 import { Helmet } from 'react-helmet-async';
 import FeaturesCard from '../../components/FeaturesCard';
 import { HorizontalHeading } from '../../horizontalHeading';
-import musicLogo from './images/musicLogo.png';
-import playlistLogo from './images/playlistLogo.png';
-import messagingLogo from './images/messagingLogo.png';
-import queueLogo from './images/queueLogo.png';
+import headphone from './images/headphone.png';
+import playlist from './images/playlist.png';
+import message from './images/message.png';
+import queue from './images/queue.png';
 
 export default function About() {
   return (
@@ -56,22 +56,22 @@ export default function About() {
 
           <HStack wrap='wrap' justify='center'>
             <FeaturesCard
-              imageUrl={musicLogo}
+              imageUrl={headphone}
               imageAlt='Music logo'
               feature='Listen to the same songs with your buddies simultaneously.'
             />
             <FeaturesCard
-              imageUrl={playlistLogo}
+              imageUrl={playlist}
               imageAlt='Playlist logo'
               feature='Create playlists based on genre and change order of songs.'
             />
             <FeaturesCard
-              imageUrl={messagingLogo}
+              imageUrl={message}
               imageAlt='Messaging logo'
               feature='Interact through instant messaging, proximity audio, reactions, and voting.'
             />
             <FeaturesCard
-              imageUrl={queueLogo}
+              imageUrl={queue}
               imageAlt='Queue logo'
               feature="A fair-queue mechanism that ensures everyone's song choices get played."
             />
