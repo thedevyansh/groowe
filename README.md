@@ -1,10 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3685488f-2c4e-49fb-a435-55f3e6aa7dae/deploy-status)](https://app.netlify.com/sites/temporaldj/deploys)
-![License](https://img.shields.io/badge/license-MIT-brightgreen)
-![Number of stars](https://img.shields.io/github/stars/thedevyansh/temporaldj)
-![GitHub last commit](https://img.shields.io/github/last-commit/thedevyansh/temporaldj)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thedevyansh/temporaldj)
-
-# Temporal.DJ
+# GrooWe
 
 !['Homepage'](snapshots/home.png)
 
@@ -22,7 +16,7 @@
 
 ## ⚙️ How it works
 
-Temporal.DJ is based on the monolithic architecture. The client communicates with the `Express.js` server through HTTP requests and `Socket.io` events. The server communicate with the YouTube API to allow users to search Youtube for songs and the Redis database to handle storing & retrieving data and searching for rooms. The Redis Adapter relies on Redis Pub/Sub mechanism which ensures horizontal scaling by adding multiple instances of the server and database.
+GrooWe is based on the monolithic architecture. The client communicates with the `Express.js` server through HTTP requests and `Socket.io` events. The server communicate with the YouTube API to allow users to search Youtube for songs and the Redis database to handle storing & retrieving data and searching for rooms. The Redis Adapter relies on Redis Pub/Sub mechanism which ensures horizontal scaling by adding multiple instances of the server and database.
 
 An overview of the application core constructs is given below:
 
@@ -54,7 +48,7 @@ The queue mechanism is handled through `Socket.io` events. Events will be emitte
 
 ### Playlists
 
-A playlist is a collection of songs. Songs are played through playlists created by users. Users can freely add or remove songs from their playlists and rearrange the order of their songs. Playlists help facilitate the queue mechanism of Temporal.DJ.
+A playlist is a collection of songs. Songs are played through playlists created by users. Users can freely add or remove songs from their playlists and rearrange the order of their songs. Playlists help facilitate the queue mechanism of GrooWe.
 
 !['Playlists'](snapshots/playlists.png)
 
