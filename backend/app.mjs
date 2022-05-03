@@ -64,7 +64,7 @@ app.use(
     origin:
       !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : ['https://temporaldj.netlify.app', 'https://temporaldj.tech', 'https://groowe.netlify.app'],
+        : ['https://groowe.netlify.app'],
     credentials: true,
   })
 );
@@ -75,7 +75,7 @@ app.use(express.static(join(__dirname, 'public')));
 const RedisStore = connectRedis(session);
 const sess = {
   store: new RedisStore({ client: redisClient }),
-  name: 'temporaldj.id',
+  name: 'groowe.id',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
