@@ -36,9 +36,9 @@ export default function About() {
         <Text fontSize='5xl' fontWeight='bold' mb={4}>
           GrooWe
         </Text>
-        <VStack spacing={10}>
-          <Box borderWidth='1px' borderRadius='lg' p={4}>
-            <Center>
+        <VStack spacing={8}>
+          <Box>
+            <Center mb={2}>
               <Badge borderRadius='full' px='2'>
                 Groove on music together!
               </Badge>
@@ -51,7 +51,7 @@ export default function About() {
           </Box>
 
           <Text fontSize='3xl' fontWeight='bold'>
-            Main Features.
+            Main Features
           </Text>
 
           <HStack wrap='wrap' justify='center'>
@@ -79,7 +79,7 @@ export default function About() {
 
           <Box borderWidth='1px' borderRadius='lg' p={4}>
             <Text fontSize='2xl' fontWeight='bold'>
-              Rooms.
+              Rooms
             </Text>
 
             <Box>
@@ -93,7 +93,7 @@ export default function About() {
 
           <Box borderWidth='1px' borderRadius='lg' p={4}>
             <Text fontSize='2xl' fontWeight='bold'>
-              Playlists.
+              Playlists
             </Text>
 
             <Box>
@@ -106,7 +106,7 @@ export default function About() {
 
           <Box borderWidth='1px' borderRadius='lg' p={4}>
             <Text fontSize='2xl' fontWeight='bold'>
-              Queue Mechanism.
+              Queue Mechanism
             </Text>
 
             <Box>
@@ -126,7 +126,21 @@ export default function About() {
 
           <Box borderWidth='1px' borderRadius='lg' p={4}>
             <Text fontSize='2xl' fontWeight='bold'>
-              Voting.
+              Proximity Audio
+            </Text>
+
+            <Box>
+              Users can drag their avatars inside rooms to interact with each
+              other and change the volume of the playing song - move closer to
+              the audio source, and volume will increase; move away from it, and
+              volume will decrease. This creates an experience of the <b>2D
+              metaverse.</b>
+            </Box>
+          </Box>
+
+          <Box borderWidth='1px' borderRadius='lg' p={4}>
+            <Text fontSize='2xl' fontWeight='bold'>
+              Voting
             </Text>
 
             <Box>
