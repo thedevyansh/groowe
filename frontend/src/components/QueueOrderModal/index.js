@@ -14,9 +14,9 @@ import {
 
 function QueueOrderModal({ isOpen, onClose, username, queue }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='xl'>
+    <Modal isOpen={isOpen} onClose={onClose} size='2xl' motionPreset='slideInBottom'>
       <ModalOverlay />
-      <ModalContent bg='gray.900'>
+      <ModalContent bg='gray.800'>
         {queue.length === 0 && (
           <>
             <ModalHeader>No one is in the queue.</ModalHeader>

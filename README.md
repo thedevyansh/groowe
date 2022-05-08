@@ -194,6 +194,8 @@ REDIS_PORT=redis_port
 SALT_ROUNDS=10
 SESSION_SECRET=your_session_secret
 YOUTUBE_KEY=your_youtube_api_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 |Property|Description|
 |---|---|
@@ -203,6 +205,8 @@ YOUTUBE_KEY=your_youtube_api_key
 |SALT_ROUNDS|Number of salt rounds for bcrypt|
 |SESSION_SECRET|Secret for session cookies to authenticate users |
 |YOUTUBE_KEY|Your YouTube API key|
+|GOOGLE_CLIENT_ID|Google Client ID in your GCP project|
+|GOOGLE_CLIENT_SECRET|Google Client secret in your GCP project|
 3. In the root directory of **backend**, type: `npm install` to install dependencies.
 4. Run `npm start` in root directory of **backend.**
 5. Run `npm start` in root directory of **frontend.**

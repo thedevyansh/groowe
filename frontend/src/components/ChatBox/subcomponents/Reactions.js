@@ -7,8 +7,8 @@ import styled from '@emotion/styled';
 const ReactionsContainer = styled(Flex)`
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgba(12, 22, 45, 0.5);
-  padding: 0.5rem;
+  background-color: rgba(12, 22, 45, 0.6);
+  padding: 0.3rem;
   border-radius: 8px 0 0 8px;
   margin-bottom: 0.5rem;
 `;

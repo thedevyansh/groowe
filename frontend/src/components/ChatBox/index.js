@@ -40,7 +40,7 @@ const BottomRight = styled(Flex)`
 const ChatContainer = styled(Flex)`
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgba(12, 22, 45, 0.5);
+  background-color: rgba(12, 22, 45, 0.6);
 `;
 
 function ChatBox() {
@@ -181,9 +181,7 @@ function ChatBox() {
       <Reactions />
       <ChatContainer
         height={isOpen ? '480px' : '48px'}
-        maxH='480px'
         minW='345px'
-        shadow='base'
         borderRadius='8px 0 0 0'>
         <HStack maxH='48px' justifyContent='space-between' px={4} py={2}>
           <HStack spacing={2}>
