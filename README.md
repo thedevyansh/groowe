@@ -46,10 +46,6 @@ Listen to songs in the room:
 
 Users can join the queue in the room to have the songs in their selected playlist played. The order in which users join the queue determines the order on which songs are played. For each user in the queue, the first song in their selected playlist will be played. Then the first song will be cycled to the back of the playlist. This way, each user in the queue is guaranteed to have one of their songs played and playlists of any size will continue to keep playing until the user leaves the queue.
 
-Friends in queue:
-
-!['Friends in queue'](snapshots/queuelist.png)
-
 The queue mechanism is handled through `Socket.io` events. Events will be emitted when the song plays, or when there are no more users in the queue (as to stop the song).
 
 ### Playlists
