@@ -10,16 +10,23 @@ import {
   ListItem,
   HStack,
   Divider,
+  Center,
 } from '@chakra-ui/react';
 
 function QueueOrderModal({ isOpen, onClose, username, queue }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='2xl' motionPreset='slideInBottom'>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size='2xl'
+      motionPreset='slideInBottom'>
       <ModalOverlay />
       <ModalContent bg='gray.800'>
         {queue.length === 0 && (
           <>
-            <ModalHeader>No one is in the queue.</ModalHeader>
+            <ModalHeader>
+              <Center>No one is in the queue.</Center>
+            </ModalHeader>
             <ModalCloseButton />
           </>
         )}
