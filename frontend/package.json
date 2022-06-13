@@ -19,7 +19,7 @@
     "focus-visible": "^5.2.0",
     "framer-motion": "^4.1.9",
     "he": "^1.2.0",
-    "immer": "^9.0.6",
+    "immer": "9.0.15",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
