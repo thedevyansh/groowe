@@ -11,7 +11,7 @@
     "@fontsource/inter": "^4.5.7",
     "@fontsource/poppins": "^4.5.0",
     "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@yaireo/tagify": "^4.1.1",
