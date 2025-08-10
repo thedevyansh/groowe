@@ -22,7 +22,7 @@
     "googleapis": "^73.0.0",
     "helmet": "^4.5.0",
     "http-errors": "~1.6.3",
-    "js-video-url-parser": "^0.4.3",
+    "js-video-url-parser": "^0.5.0",
     "morgan": "~1.9.1",
     "nanoid": "^3.1.23",
     "parse-iso-duration": "^1.1.0",
